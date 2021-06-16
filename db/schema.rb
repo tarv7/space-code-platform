@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_06_16_003240) do
     t.index ["payload_id"], name: "index_contracts_on_payload_id"
     t.index ["pilot_id"], name: "index_contracts_on_pilot_id"
     t.index ["state"], name: "index_contracts_on_state"
+    t.check_constraint "payload_weight >= 0", name: "check_positive_payload_weight"
     t.check_constraint "value >= 0", name: "check_positive_value"
   end
 
@@ -57,8 +58,7 @@ ActiveRecord::Schema.define(version: 2021_06_16_003240) do
   create_table "reports", force: :cascade do |t|
     t.string "reportable_type", null: false
     t.bigint "reportable_id", null: false
-    t.string "action", null: false
-    t.string "value", null: false
+    t.text "description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable"
