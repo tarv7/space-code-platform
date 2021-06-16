@@ -13,6 +13,7 @@ class CreateContracts < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
+    add_check_constraint :contracts, 'payload_weight >= 0', name: 'check_positive_payload_weight'
     add_check_constraint :contracts, 'value >= 0', name: 'check_positive_value'
 
     add_index :contracts, :state
