@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Pilot, type: :model do
+  subject { build(:pilot) }
+
   describe 'associations' do
     it { should belong_to(:location) }
   end
@@ -15,5 +17,17 @@ RSpec.describe Pilot, type: :model do
     it { should validate_length_of(:name).is_at_least(2).is_at_most(255) }
     it { should validate_length_of(:age).is_at_least(0) }
     it { should validate_length_of(:credits).is_at_least(0) }
+
+    describe "Check Certification in Luhn standard" do
+      context "when is valid" do
+        it { expect(subject).to be_valid }
+      end
+
+      context "when is invalid" do
+        subject { build(:pilot, certification: "1234567") }
+        
+        it { expect(subject).to_not be_valid }
+      end
+    end
   end
 end
