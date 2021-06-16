@@ -6,7 +6,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 
 # Install additional packages.
 RUN apt update -qq
-RUN apt install -y postgresql-client nodejs yarn
+RUN apt install -y postgresql-client nodejs yarn sqlite3 libsqlite3-dev
 
 # Prepare working directory.
 WORKDIR /src
