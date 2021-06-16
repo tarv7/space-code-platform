@@ -7,7 +7,7 @@ class Contract < ApplicationRecord
   enum state: %i[opened processing finished]
 
   validates_presence_of :payload_weight, :value, :state
-  validates :description, length: { in: 0..5000 }
+  validates :description, length: { maximum: 5000 }
   validates :payload_weight, numericality: { only_integer: { greater_than: 0 } }
   validates :value, numericality: { only_integer: { greater_than: 0 } }
 end
