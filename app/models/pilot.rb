@@ -6,4 +6,11 @@ class Pilot < ApplicationRecord
   validates :name, length: { in: 2..255 }
   validates :age, numericality: { only_integer: { greater_than: 0 } }
   validates :credits, numericality: { only_integer: { greater_than_or_equal_to: 0 } }
+  validate :check_luhn_certification
+
+  def check_luhn_certification
+    return if Luhn.valid?(certification)
+
+    self.errors.add :certification, "Certification must follow the Luhn standard"
+  end
 end
