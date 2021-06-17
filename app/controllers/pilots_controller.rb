@@ -3,8 +3,6 @@ class PilotsController < ApplicationController
     pilot = Pilot.create!(pilot_params)
 
     render json: pilot, status: :created
-  rescue StandardError => e
-    render json: { message: e.message }, status: :bad_request
   end
 
   private
