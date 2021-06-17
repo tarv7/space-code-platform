@@ -5,6 +5,7 @@ RSpec.describe Pilot, type: :model do
 
   describe 'associations' do
     it { should belong_to(:location) }
+    it { should have_many(:ships) }
   end
 
   describe 'validations' do

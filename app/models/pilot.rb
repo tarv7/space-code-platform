@@ -1,7 +1,7 @@
 class Pilot < ApplicationRecord
   belongs_to :location, class_name: "Planet"
 
-  has_one :ship, dependent: :destroy
+  has_many :ships, dependent: :destroy
 
   validates_presence_of :certification, :name, :age, :credits
   validates :certification, uniqueness: true, length: { is: 7 }
@@ -10,7 +10,7 @@ class Pilot < ApplicationRecord
   validates :credits, numericality: { greater_than_or_equal_to: 0 }
   validate :check_luhn_certification
 
-  accepts_nested_attributes_for :ship
+  accepts_nested_attributes_for :ships
 
   def check_luhn_certification
     return if Luhn.valid?(certification)

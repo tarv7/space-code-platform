@@ -7,8 +7,14 @@ FactoryBot.define do
 
     association :location, factory: :planet
 
-    trait :with_ship do
-      association :ship
+    transient do
+      ships_count { 1 }
+    end
+
+    trait :with_ships do
+      after :build do |pilot, evaluator|
+        pilot.ships = build_list(:ship, evaluator.ships_count)
+      end
     end
   end
 end
