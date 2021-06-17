@@ -8,6 +8,6 @@ class Contract < ApplicationRecord
 
   validates_presence_of :payload_weight, :value, :state
   validates :description, length: { maximum: 5000 }
-  validates :payload_weight, numericality: { only_integer: { greater_than: 0 } }
-  validates :value, numericality: { only_integer: { greater_than: 0 } }
+  validates :payload_weight, numericality: { greater_than: 0 }
+  validates :value, numericality: { greater_than: 0 }
 end
