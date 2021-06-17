@@ -13,6 +13,7 @@ RSpec.describe Pilot, type: :model do
     it { should validate_presence_of(:age) }
     it { should validate_presence_of(:credits) }
 
+    it { should validate_uniqueness_of(:certification).case_insensitive }
     it { should validate_length_of(:certification).is_equal_to(7) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(255) }
     it { should validate_length_of(:age).is_at_least(0) }

@@ -6,5 +6,9 @@ FactoryBot.define do
     credits { 10 }
 
     association :location, factory: :planet
+
+    trait :with_ship do
+      association :ship
+    end
   end
 end
