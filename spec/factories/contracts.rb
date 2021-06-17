@@ -12,5 +12,21 @@ FactoryBot.define do
     trait :with_pilot do
       association :pilot
     end
+
+    trait :opened do
+      state { 'opened' }
+    end
+
+    trait :processing do
+      state { 'processing' }
+
+      with_pilot
+    end
+
+    trait :finished do
+      state { 'finished' }
+
+      with_pilot
+    end
   end
 end

@@ -3,8 +3,6 @@ class ContractsController < ApplicationController
     contract = Contract.create!(contract_params)
 
     render json: contract, status: :created
-  rescue StandardError => e
-    render json: { message: e.message }, status: :bad_request
   end
 
   private

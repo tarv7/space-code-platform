@@ -25,10 +25,10 @@ RSpec.describe ContractsController, type: :controller do
 
         body = JSON.parse(response.body).deep_symbolize_keys
 
-        expect(body.keys).to match_array(%i[id description value payload_weight payload origin destiny pilot])
+        expect(body.keys).to match_array(%i[id description value state payload origin destiny pilot])
         expect(body[:description]).to eq(expected_response[:description])
         expect(body[:value]).to eq(expected_response[:value])
-        expect(body[:payload_weight]).to eq(expected_response[:payload_weight])
+        expect(body[:state]).to eq(expected_response[:state])
       end
     end
 

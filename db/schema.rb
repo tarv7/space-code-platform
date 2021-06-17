@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_035112) do
     t.bigint "destiny_id", null: false
     t.integer "value", null: false
     t.bigint "pilot_id"
-    t.string "state", default: "opened", null: false
+    t.string "state", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["destiny_id"], name: "index_contracts_on_destiny_id"
