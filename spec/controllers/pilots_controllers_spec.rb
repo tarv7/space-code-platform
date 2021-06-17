@@ -4,13 +4,14 @@ RSpec.describe PilotsController, type: :controller do
   let(:planet) { create(:planet) }
 
   describe "POST #create" do
+    let(:ship_params) { attributes_for_list(:ship, 3) }
+    let(:params) { { pilot: pilot_params.merge(ships_attributes: ship_params) } }
+
     subject { post :create, params: params }
 
     context "when is successfully" do
       let(:pilot_params) { attributes_for(:pilot).merge(location_id: planet.id) }
-      let(:ship_params) { attributes_for_list(:ship, 3) }
-      let(:params) { { pilot: pilot_params.merge(ships_attributes: ship_params) } }
-      let(:expected_response) { pilot_params.merge(location: { name: planet.name }).merge(ship: ship_params) }
+      let(:expected_response) { pilot_params }
 
       it "returns http success" do
         subject
@@ -23,7 +24,7 @@ RSpec.describe PilotsController, type: :controller do
 
         body = JSON.parse(response.body).deep_symbolize_keys
 
-        expect(JSON.parse(response.body).keys).to match_array(%w[id certification name age credits location ships])
+        expect(body.keys).to match_array(%i[id certification name age credits location ships])
         expect(body[:certification]).to eq(expected_response[:certification])
         expect(body[:name]).to eq(expected_response[:name])
         expect(body[:age]).to eq(expected_response[:age])
@@ -33,9 +34,6 @@ RSpec.describe PilotsController, type: :controller do
 
     context "when is fail" do
       let(:pilot_params) { attributes_for(:pilot) }
-      let(:ship_params) { attributes_for_list(:ship, 1) }
-      let(:params) { { pilot: pilot_params.merge(ships_attributes: ship_params) } }
-      let(:expected_response) { pilot_params.merge(location: { name: planet.name }).merge(ship: ship_params) }
 
       it "returns http success" do
         subject
