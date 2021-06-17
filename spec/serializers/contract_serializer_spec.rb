@@ -8,7 +8,7 @@ RSpec.describe ContractSerializer do
       id: contract.id,
       description: contract.description,
       value: contract.value,
-      payload_weight: contract.payload_weight,
+      state: contract.state,
       pilot: {
         id: contract.pilot.id,
         certification: contract.pilot.certification,
@@ -18,7 +18,8 @@ RSpec.describe ContractSerializer do
       },
       payload: {
         id: contract.payload.id,
-        name: contract.payload.name
+        name: contract.payload.name,
+        weight: contract.payload_weight
       },
       origin: {
         id: contract.origin.id,

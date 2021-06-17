@@ -1,5 +1,5 @@
 class ContractSerializer < ActiveModel::Serializer
-  attributes :id, :description, :value, :payload
+  attributes :id, :description, :value, :payload, :state
 
   belongs_to :pilot
   belongs_to :origin
