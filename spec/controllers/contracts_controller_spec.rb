@@ -35,7 +35,7 @@ RSpec.describe ContractsController, type: :controller do
     context "when is fail" do
       let(:contract_params) { attributes_for(:contract) }
 
-      it "returns http success" do
+      it "returns http bad_request" do
         subject
 
         expect(response).to have_http_status(:bad_request)
