@@ -11,7 +11,7 @@ module Contracts
     private
 
     def contract_params
-      params.permit(:id, :pilot_id)
+      params.permit(:id)
     end
   end
 end
