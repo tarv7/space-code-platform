@@ -16,5 +16,7 @@ FactoryBot.define do
         pilot.ships = build_list(:ship, evaluator.ships_count)
       end
     end
+
+    factory :pilot_with_ships, traits: [:with_ships]
   end
 end

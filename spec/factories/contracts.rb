@@ -10,11 +10,17 @@ FactoryBot.define do
     association :destiny, factory: :planet
 
     trait :with_pilot do
-      association :pilot
+      association :pilot, factory: :pilot_with_ships
     end
 
     trait :opened do
       state { 'opened' }
+    end
+
+    trait :accepted do
+      state { 'accepted' }
+
+      with_pilot
     end
 
     trait :processing do
