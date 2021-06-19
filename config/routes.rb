@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :ships, only: [] do
     patch :fuel, on: :member, to: 'ships/fuel#update'
   end
+
+  resources :travels, only: :create
 end

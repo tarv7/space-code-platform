@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe PilotSerializer do
-  let!(:pilot) { create(:pilot, :with_ships) }
+  let!(:pilot) { create(:pilot_with_ships) }
   let(:expected) do
     {
       id: pilot.id,

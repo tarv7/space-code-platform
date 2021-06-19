@@ -16,6 +16,16 @@ class Contract < ApplicationRecord
 
           transitions from: :opened, to: :accepted
         end
+
+        event :process do
+          before :before_process_event
+
+          transitions from: :accepted, to: :processing
+        end
+
+        event :finish do
+          transitions from: :processing, to: :finished
+        end
       end
 
       #
@@ -28,6 +38,8 @@ class Contract < ApplicationRecord
 
         self.pilot = pilot
       end
+
+      def before_process_event(path); end
     end
   end
 end

@@ -6,8 +6,6 @@ class Contract < ApplicationRecord
   belongs_to :origin, class_name: "Planet"
   belongs_to :destiny, class_name: "Planet"
 
-  scope :opened, -> { where(state: 'opened') }
-
   validates_presence_of :payload_weight, :value, :state
   validates :description, length: { maximum: 5000 }
   validates :payload_weight, numericality: { greater_than: 0 }
