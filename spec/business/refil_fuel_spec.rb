@@ -10,7 +10,10 @@ RSpec.describe RefilFuel, type: :model do
       let(:quantity) { 1 }
 
       it 'should update field fuel_level and credits' do
-        expect { subject }.to change { ship.reload.fuel_level }.from(0).to(1).and change { ship.pilot.reload.credits }.from(10).to(3)
+        expect { subject }.
+          to change { ship.reload.fuel_level }.from(0).to(1).
+          and change { ship.pilot.reload.credits }.from(10).to(3).
+          and change { ship.pilot.reload.reports.count }.by(1)
       end
     end
 

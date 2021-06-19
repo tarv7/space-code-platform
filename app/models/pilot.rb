@@ -3,6 +3,7 @@ class Pilot < ApplicationRecord
 
   has_many :ships, dependent: :destroy
   has_many :contracts, dependent: :nullify
+  has_many :reports, as: :reportable
 
   validates_presence_of :certification, :name, :age, :credits
   validates :certification, uniqueness: true, length: { is: 7 }
@@ -17,5 +18,9 @@ class Pilot < ApplicationRecord
     return if Luhn.valid?(certification)
 
     self.errors.add :certification, "Certification must follow the Luhn standard"
+  end
+
+  def quantity_resource(resource)
+    contracts.finished.where(payload: resource).sum(:payload_weight)
   end
 end

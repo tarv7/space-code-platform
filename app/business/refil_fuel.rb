@@ -16,6 +16,8 @@ class RefilFuel
     Ship.transaction do
       ship.pilot.update!(credits: new_credits)
       ship.update!(fuel_level: new_fuel)
+
+      ship.pilot.reports.create(description: "#{ship.pilot.name} bought: -₭#{decrease_credits}")
     end
   end
 
@@ -31,9 +33,11 @@ class RefilFuel
     ship.fuel_level + fuel_quantity
   end
 
-  def new_credits
-    decrease_credits = fuel_quantity * UNIT_COST
+  def decrease_credits
+    fuel_quantity * UNIT_COST
+  end
 
+  def new_credits
     ship.pilot.credits - decrease_credits
   end
 end
