@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   end
 
   resources :travels, only: :create
+
+  resources :reports, only: :index
 end
