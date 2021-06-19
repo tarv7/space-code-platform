@@ -18,4 +18,8 @@ class Pilot < ApplicationRecord
 
     self.errors.add :certification, "Certification must follow the Luhn standard"
   end
+
+  def quantity_resource(resource)
+    contracts.finished.where(payload: resource).sum(:payload_weight)
+  end
 end
