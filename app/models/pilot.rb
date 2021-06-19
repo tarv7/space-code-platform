@@ -2,6 +2,7 @@ class Pilot < ApplicationRecord
   belongs_to :location, class_name: "Planet"
 
   has_many :ships, dependent: :destroy
+  has_many :contracts, dependent: :nullify
 
   validates_presence_of :certification, :name, :age, :credits
   validates :certification, uniqueness: true, length: { is: 7 }

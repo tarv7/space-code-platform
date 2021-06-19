@@ -75,7 +75,7 @@ RSpec.describe Travel, type: :model do
 
         subject { described_class.new(contract: contract, ship_id: -1).call! }
 
-        it_behaves_like 'raise exception and keep contract in accepted state', [ActiveRecord::RecordNotFound, "Couldn't find Ship with 'id'=-1 [WHERE \"ships\".\"pilot_id\" = $1]"]
+        it_behaves_like 'raise exception and keep contract in accepted state', [ActiveRecord::RecordNotFound]
       end
 
       context "when raise exceptions in the middle of the travel" do
