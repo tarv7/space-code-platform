@@ -5,8 +5,8 @@ RSpec.describe Reports::TransactionSerializer do
   let(:pilot) { create(:pilot) }
   let(:planet) { create(:planet) }
 
-  let(:contract_1) { create(:contract) }
-  let(:contract_2) { create(:contract) }
+  let(:contract_1) { create(:contract, :accepted) }
+  let(:contract_2) { create(:contract, :accepted) }
 
   let!(:report_1) { create(:report, reportable: pilot, description: "#{pilot.name} bought fuel: +₭210", created_at: Date.today.ago(2.years)) }
   let!(:report_2) { create(:report, reportable: planet, description: "#{planet.name} receveid food: +₭210", created_at: Date.today.ago(4.years)) }

@@ -13,20 +13,25 @@ class Contract < ApplicationRecord
     
         event :accept do
           before :before_accept_event
+          after_commit :after_accepted
 
           transitions from: :opened, to: :accepted
         end
 
         event :process do
-          before :before_process_event
+          after_commit :after_processing
 
           transitions from: :accepted, to: :processing
         end
 
         event :finish do
+          after_commit :after_finished
+
           transitions from: :processing, to: :finished
         end
       end
+
+      private
 
       #
       # Callbacks
@@ -34,12 +39,25 @@ class Contract < ApplicationRecord
 
       def before_accept_event(pilot)
         raise EventError, "Contract already has a pilot. Event: opened to accepted" if self.pilot.present?
-        raise EventError, "Missing pilot. Event: opened to accepted" if pilot.blank?
+        raise EventError, "Missing pilot. Event: opened to accepted" unless pilot.is_a?(Pilot)
 
         self.pilot = pilot
       end
 
-      def before_process_event(path); end
+      def after_accepted(_)
+        self.reports.create(description: "#{self.description} was accepted")
+        self.pilot.reports.create(description: "#{self.pilot.name} accepted the contract")
+      end
+
+      def after_processing(path)
+        self.reports.create(description: "#{self.description} is on transport route. #{path}")
+      end
+
+      def after_finished
+        self.reports.create(description: "#{self.description} was finished")
+        self.reports.create(description: "#{self.description} paid: -₭#{self.value}")
+        self.pilot.reports.create(description: "#{self.pilot.name} received: -₭#{self.value}")
+      end
     end
   end
 end

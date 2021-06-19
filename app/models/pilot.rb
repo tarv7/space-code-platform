@@ -3,6 +3,7 @@ class Pilot < ApplicationRecord
 
   has_many :ships, dependent: :destroy
   has_many :contracts, dependent: :nullify
+  has_many :reports, as: :reportable
 
   validates_presence_of :certification, :name, :age, :credits
   validates :certification, uniqueness: true, length: { is: 7 }
