@@ -1,0 +1,274 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/pilots":
+    post:
+      summary: Add pilots and their ships to the system
+      tags:
+      - Pilot
+      parameters: []
+      responses:
+        '201':
+          description: pilot and ships createds
+        '400':
+          description: bad request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  value: hehehe
+                certification:
+                  type: string
+                age:
+                  type: integer
+                credits:
+                  type: integer
+                payload_id:
+                  type: integer
+                location_id:
+                  type: integer
+                ships_attributes:
+                  type: array
+                  items:
+                    properties:
+                      fuel_capacity:
+                        type: integer
+                      fuel_level:
+                        type: integer
+                      weight_capacity:
+                        type: integer
+                    required:
+                    - fuel_capacity
+                    - fuel_level
+                    - weight_capacity
+              required:
+              - name
+              - certification
+              - age
+              - credits
+              - payload_id
+              - ships_attributes
+          application/xml:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  value: hehehe
+                certification:
+                  type: string
+                age:
+                  type: integer
+                credits:
+                  type: integer
+                payload_id:
+                  type: integer
+                location_id:
+                  type: integer
+                ships_attributes:
+                  type: array
+                  items:
+                    properties:
+                      fuel_capacity:
+                        type: integer
+                      fuel_level:
+                        type: integer
+                      weight_capacity:
+                        type: integer
+                    required:
+                    - fuel_capacity
+                    - fuel_level
+                    - weight_capacity
+              required:
+              - name
+              - certification
+              - age
+              - credits
+              - payload_id
+              - ships_attributes
+  "/contracts":
+    post:
+      summary: Publish transport contracts
+      tags:
+      - Contract
+      parameters: []
+      responses:
+        '201':
+          description: contract created
+        '400':
+          description: bad request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                value:
+                  type: integer
+                payload_weight:
+                  type: integer
+                payload_id:
+                  type: integer
+                origin_id:
+                  type: integer
+                destiny_id:
+                  type: integer
+              required:
+              - value
+              - payload_weight
+              - payload_id
+              - origin_id
+              - destiny_id
+          application/xml:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                value:
+                  type: integer
+                payload_weight:
+                  type: integer
+                payload_id:
+                  type: integer
+                origin_id:
+                  type: integer
+                destiny_id:
+                  type: integer
+              required:
+              - value
+              - payload_weight
+              - payload_id
+              - origin_id
+              - destiny_id
+  "/contracts/opened":
+    get:
+      summary: List open contracts
+      tags:
+      - Open Contracts
+      responses:
+        '200':
+          description: openeds
+  "/contracts/{id}/accept":
+    patch:
+      summary: Accept transport contracts
+      tags:
+      - Accept Contracts
+      parameters:
+      - name: auth-pilot-id
+        in: header
+        schema:
+          type: string
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: accepted
+        '400':
+          description: bad request
+  "/travels":
+    post:
+      summary: Travel between planets and Grant credits to the pilot after fulfilling
+        the contract
+      tags:
+      - Travel
+      parameters:
+      - name: auth-pilot-id
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: traveled
+        '400':
+          description: bad request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                ship_id:
+                  type: integer
+              required:
+              - id
+              - ship_id
+          application/xml:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                ship_id:
+                  type: integer
+              required:
+              - id
+              - ship_id
+  "/ships/{id}/fuel":
+    patch:
+      summary: Register a refill of the fuel
+      tags:
+      - Refil Fuel
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: filled fuel
+        '400':
+          description: bad request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+              required:
+              - quantity
+          application/xml:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+              required:
+              - quantity
+  "/reports":
+    get:
+      summary: Reports
+      tags:
+      - Reports
+      parameters:
+      - name: type
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: reports
+        '406':
+          description: not acceptable
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
