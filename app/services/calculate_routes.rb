@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
+# Class that contains the algorithm to calculate the best routes for all pairs of planet.
+# The class was implemented based on the classic Floyd Warshall algorithm.
 class CalculateRoutes
   KEY_CACHE_BEST_PATHS = 'CalculateRoutes#best_paths'
   INFINITE = (1 << (1.size * 8 - 1)) - 1 # 9223372036854775807
 
   def initialize
     @costs = {}
-    @sub_paths = {}
     @paths = {}
+
+    initialize_sub_paths
   end
 
   def best_path(origin:, destiny:)
@@ -42,13 +45,6 @@ class CalculateRoutes
 
   def calculate_costs
     @costs = travel_routes.inject({}) { |hash, value| hash.merge!(value) }
-    @sub_paths = {}
-
-    planets.each do |origin|
-      planets.each do |destiny|
-        @sub_paths[{ origin => destiny }] = origin
-      end
-    end
 
     planets.each do |sub_planet|
       planets.each do |origin|
@@ -73,8 +69,6 @@ class CalculateRoutes
   end
 
   def calculate_paths
-    @paths = {}
-
     planets.each do |origin|
       planets.each do |destiny|
         @paths[{ origin => destiny }] = depth_first_search_path(origin, destiny)
@@ -88,6 +82,16 @@ class CalculateRoutes
     path << destiny
 
     path
+  end
+
+  def initialize_sub_paths
+    @sub_paths = {}
+
+    planets.each do |origin|
+      planets.each do |destiny|
+        @sub_paths[{ origin => destiny }] = origin
+      end
+    end
   end
 
   def planets

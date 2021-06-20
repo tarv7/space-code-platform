@@ -12,18 +12,34 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
   let(:food) { create(:resource, name: 'food') }
   let(:minerals) { create(:resource, name: 'minerals') }
 
-  let!(:contract_1) { create(:contract, :finished, pilot: pilot_1, origin: planet_1, destiny: planet_2, payload: water, payload_weight: 1) }
-  let!(:contract_2) { create(:contract, :finished, pilot: pilot_1, origin: planet_1, destiny: planet_2, payload: minerals, payload_weight: 1) }
-
-  before do
-    create_list(:contract, 4, :finished, pilot: pilot_2, origin: planet_1, destiny: planet_2, payload: food, payload_weight: 1)
-    create_list(:contract, 8, :finished, pilot: pilot_2, origin: planet_2, destiny: planet_1, payload: water, payload_weight: 1)
-    create_list(:contract, 16, :finished, pilot: pilot_2, origin: planet_2, destiny: planet_1, payload: minerals, payload_weight: 1)
+  let!(:contract_1) do
+    create(:contract, :finished, pilot: pilot_1, origin: planet_1, destiny: planet_2, payload: water, payload_weight: 1)
+  end
+  let!(:contract_2) do
+    create(:contract, :finished, pilot: pilot_1, origin: planet_1, destiny: planet_2, payload: food, payload_weight: 1)
   end
 
-  let!(:report_1) { create(:report, reportable: planet_1, description: "#{planet_1.name} receveid food: +₭210", created_at: Date.today.ago(2.years)) }
-  let!(:report_2) { create(:report, reportable: contract_1, description: "#{contract_1.description} paid: +₭936", created_at: Date.today.ago(3.years)) }
-  let!(:report_3) { create(:report, reportable: contract_2, description: "#{contract_2.description} paid: +₭1200", created_at: Date.today.ago(1.years)) }
+  before do
+    create_list(:contract, 4, :finished, pilot: pilot_2, origin: planet_1, destiny: planet_2, payload: food,
+                                         payload_weight: 1)
+    create_list(:contract, 8, :finished, pilot: pilot_2, origin: planet_2, destiny: planet_1, payload: water,
+                                         payload_weight: 1)
+    create_list(:contract, 16, :finished, pilot: pilot_2, origin: planet_2, destiny: planet_1, payload: minerals,
+                                          payload_weight: 1)
+  end
+
+  let!(:report_1) do
+    create(:report, reportable: planet_1, description: "#{planet_1.name} receveid food: +₭210",
+                    created_at: Date.today.ago(2.years))
+  end
+  let!(:report_2) do
+    create(:report, reportable: contract_1, description: "#{contract_1.description} paid: +₭936",
+                    created_at: Date.today.ago(3.years))
+  end
+  let!(:report_3) do
+    create(:report, reportable: contract_2, description: "#{contract_2.description} paid: +₭1200",
+                    created_at: Date.today.ago(1.years))
+  end
 
   describe 'GET #index' do
     subject { get :index, params: { type: type } }
@@ -54,8 +70,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
             planet_1.name => {
               'sent' => {
                 'water' => 1,
-                'minerals' => 1,
-                'food' => 4
+                'food' => 5
               },
               'received' => {
                 'water' => 8,
@@ -71,8 +86,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
               },
               'received' => {
                 'water' => 1,
-                'minerals' => 1,
-                'food' => 4
+                'food' => 5
               }
             }
           }
@@ -89,7 +103,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
         [
           {
             pilot_1.name => {
-              'minerals' => 1,
+              'food' => 1,
               'water' => 1
             }
           },

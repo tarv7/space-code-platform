@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# class that contains the business rule necessary to carry out intergalactic travel
 class Travel
   class TravelError < StandardError; end
 
@@ -26,12 +27,17 @@ class Travel
       contract.process!(path)
       contract.finish!
 
-      new_credits = pilot.credits + contract.value
-      new_fuel_level = ship.fuel_level - cost
-
       pilot.update!(location: contract.destiny, credits: new_credits)
       ship.update!(fuel_level: new_fuel_level)
     end
+  end
+
+  def new_credits
+    pilot.credits + contract.value
+  end
+
+  def new_fuel_level
+    ship.fuel_level - cost
   end
 
   def cost

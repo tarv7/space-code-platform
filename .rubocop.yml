@@ -1,0 +1,68 @@
+AllCops:
+  DisplayCopNames: true
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/*'
+
+Style/Encoding:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Naming/VariableNumber:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Exclude:
+    - "spec/**/*.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*.rb"
+    - "app/models/concerns/contract/stateable.rb"
+
+Layout/DotPosition:
+    Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/CommentedKeyword:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Lint/ShadowingOuterLocalVariable:
+  Exclude:
+    - "spec/rails_helper.rb"
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "app/services/calculate_routes.rb"
+    - "app/serializers/reports/by_planet_serializer.rb"
+
+Metrics/AbcSize:
+  Exclude:
+    - "app/services/calculate_routes.rb"
+    - "app/serializers/reports/by_planet_serializer.rb"
+    - "app/serializers/reports/by_pilot_serializer.rb"
+
+Metrics/MethodLength:
+  Exclude:
+    - "app/services/calculate_routes.rb"
+    - "app/serializers/reports/by_planet_serializer.rb"
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "app/serializers/reports/by_planet_serializer.rb"

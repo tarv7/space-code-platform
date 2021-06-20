@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# class that contains the business rule necessary to supply ships
 class RefilFuel
   class RefilFuelError < StandardError; end
 
@@ -17,7 +18,7 @@ class RefilFuel
       ship.pilot.update!(credits: new_credits)
       ship.update!(fuel_level: new_fuel)
 
-      ship.pilot.reports.create(description: "#{ship.pilot.name} bought: -₭#{decrease_credits}")
+      create_report
     end
   end
 
@@ -28,6 +29,10 @@ class RefilFuel
   private
 
   attr_accessor :ship, :fuel_quantity
+
+  def create_report
+    ship.pilot.reports.create(description: "#{ship.pilot.name} bought: -₭#{decrease_credits}")
+  end
 
   def new_fuel
     ship.fuel_level + fuel_quantity
