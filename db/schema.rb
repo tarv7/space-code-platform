@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_16_003240) do
+ActiveRecord::Schema.define(version: 2021_06_20_183254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_06_16_003240) do
     t.index ["payload_id"], name: "index_contracts_on_payload_id"
     t.index ["pilot_id"], name: "index_contracts_on_pilot_id"
     t.index ["state"], name: "index_contracts_on_state"
+    t.check_constraint "origin_id <> destiny_id", name: "check_same_planets"
     t.check_constraint "payload_weight >= 0", name: "check_positive_payload_weight"
     t.check_constraint "value >= 0", name: "check_positive_value"
   end

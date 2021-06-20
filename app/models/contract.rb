@@ -14,10 +14,17 @@ class Contract < ApplicationRecord
   validates :description, length: { maximum: 5000 }
   validates :payload_weight, numericality: { greater_than: 0 }
   validates :value, numericality: { greater_than: 0 }
+  validate :validate_same_planets
 
   before_commit :report_opened, on: :create
 
   private
+
+  def validate_same_planets
+    return if origin != destiny
+
+    errors.add(:destiny, 'is the same as the origin')
+  end
 
   def report_opened
     return unless opened?

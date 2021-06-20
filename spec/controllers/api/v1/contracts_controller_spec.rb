@@ -36,7 +36,7 @@ RSpec.describe Api::V1::ContractsController, type: :controller do
     end
 
     context 'when is fail' do
-      let(:contract_params) { attributes_for(:contract) }
+      let(:contract_params) { attributes_for(:contract, origin_id: origin.id) }
 
       it 'returns http bad_request' do
         subject
@@ -48,7 +48,7 @@ RSpec.describe Api::V1::ContractsController, type: :controller do
         subject
 
         expect(body).
-          to match('message' => 'Validation failed: Payload must exist, Origin must exist, Destiny must exist')
+          to match('message' => 'Validation failed: Payload must exist, Destiny must exist')
       end
     end
   end
