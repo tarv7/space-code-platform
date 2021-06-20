@@ -21,6 +21,10 @@ Rails.application.routes.draw do
       resources :travels, only: :create
 
       resources :reports, only: :index
+
+      resources :planets, only: :index
+
+      resources :travel_routes, only: :index
     end
   end
 end

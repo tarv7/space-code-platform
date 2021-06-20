@@ -24,6 +24,28 @@ describe 'Space Code Platform' do
     create(:travel_route, origin: calas, destiny: aqua, cost: 15)
   end
 
+  path '/api/v1/planets' do
+    get 'List all planets' do
+      tags 'Planet'
+      consumes 'application/json', 'application/xml'
+
+      response '200', 'openeds' do
+        run_test!
+      end
+    end
+  end # GET /api/v1/planets - List all planets
+
+  path '/api/v1/travel_routes' do
+    get 'List all travel routes with cost and paths' do
+      tags 'Travel route'
+      consumes 'application/json', 'application/xml'
+
+      response '200', 'openeds' do
+        run_test!
+      end
+    end
+  end # GET /api/v1/travel_routes - List all routes possibles
+
   path '/api/v1/pilots' do
     post 'Add pilots and their ships to the system' do
       tags 'Pilot'
@@ -31,7 +53,7 @@ describe 'Space Code Platform' do
       parameter name: :pilot, in: :body, schema: {
         type: :object,
         properties: {
-          name: { type: :string, value: 'hehehe' },
+          name: { type: :string },
           certification: { type: :string },
           age: { type: :integer },
           credits: { type: :integer },

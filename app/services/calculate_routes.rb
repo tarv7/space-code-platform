@@ -9,8 +9,6 @@ class CalculateRoutes
   def initialize
     @costs = {}
     @paths = {}
-
-    initialize_sub_paths
   end
 
   def best_path(origin:, destiny:)
@@ -45,6 +43,8 @@ class CalculateRoutes
 
   def calculate_costs
     @costs = travel_routes.inject({}) { |hash, value| hash.merge!(value) }
+
+    initialize_sub_paths
 
     planets.each do |sub_planet|
       planets.each do |origin|
