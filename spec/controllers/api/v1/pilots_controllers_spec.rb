@@ -24,13 +24,11 @@ RSpec.describe Api::V1::PilotsController, type: :controller do
       it 'match response body' do
         subject
 
-        body = JSON.parse(response.body).deep_symbolize_keys
-
-        expect(body.keys).to match_array(%i[id certification name age credits location ships])
-        expect(body[:certification]).to eq(expected_response[:certification])
-        expect(body[:name]).to eq(expected_response[:name])
-        expect(body[:age]).to eq(expected_response[:age])
-        expect(body[:credits]).to eq(expected_response[:credits])
+        expect(body.keys).to match_array(%w[id certification name age credits location ships])
+        expect(body['certification']).to eq(expected_response[:certification])
+        expect(body['name']).to eq(expected_response[:name])
+        expect(body['age']).to eq(expected_response[:age])
+        expect(body['credits']).to eq(expected_response[:credits])
       end
     end
 
@@ -46,9 +44,7 @@ RSpec.describe Api::V1::PilotsController, type: :controller do
       it 'match response body' do
         subject
 
-        body = JSON.parse(response.body).deep_symbolize_keys
-
-        expect(body).to match(message: 'Validation failed: Location must exist')
+        expect(body).to match('message' => 'Validation failed: Location must exist')
       end
     end
   end

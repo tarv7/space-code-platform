@@ -21,15 +21,11 @@ RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
       it 'returns fields if the contract' do
         subject
 
-        body = JSON.parse(response.body)
-
         expect(body.keys).to match_array(%w[id description value payload state pilot origin destiny])
       end
 
       it 'should update state to accepted' do
         subject
-
-        body = JSON.parse(response.body)
 
         expect(body['state']).to eq('accepted')
         expect(contract.reload.state).to eq('accepted')
@@ -49,8 +45,6 @@ RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
         it 'returns message error' do
           subject
 
-          body = JSON.parse(response.body)
-
           expect(body['message']).to eq('You need to log into the system')
         end
       end
@@ -68,8 +62,6 @@ RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
 
         it 'returns message error' do
           subject
-
-          body = JSON.parse(response.body)
 
           expect(body['message']).to eq('Couldn\'t find Contract with \'id\'=-1')
         end
@@ -92,8 +84,6 @@ RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
 
         it 'returns message error' do
           subject
-
-          body = JSON.parse(response.body)
 
           expect(body['message']).to eq('StandardError')
         end

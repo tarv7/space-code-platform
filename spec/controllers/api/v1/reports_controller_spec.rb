@@ -56,8 +56,6 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
       it do
         subject
 
-        body = JSON.parse(response.body)
-
         expect(body).to match(expected)
       end
     end
@@ -146,8 +144,6 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
 
       it 'returns response expected' do
         subject
-
-        body = JSON.parse(response.body)
 
         expect(body).to match({ 'message' => 'Type no exists' })
       end

@@ -19,9 +19,7 @@ RSpec.describe Api::V1::Contracts::OpenedsController, type: :controller do
     it 'returns only opened contracts' do
       subject
 
-      body = JSON.parse(response.body).map(&:deep_symbolize_keys)
-
-      response_ids = body.map { |contract| contract[:id] }
+      response_ids = body.map { |contract| contract['id'] }
       expect(response_ids).to match_array(openeds.map(&:id))
     end
   end

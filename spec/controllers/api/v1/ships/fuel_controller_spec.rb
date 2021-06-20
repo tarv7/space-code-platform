@@ -25,13 +25,11 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
       it 'match response body' do
         subject
 
-        body = JSON.parse(response.body).symbolize_keys
-
-        expect(body.keys).to match_array(%i[id fuel_capacity fuel_level weight_capacity pilot])
-        expect(body[:id]).to eq(ship.id)
-        expect(body[:fuel_level]).to eq(1)
-        expect(body[:fuel_capacity]).to eq(ship.fuel_capacity)
-        expect(body[:weight_capacity]).to eq(ship.weight_capacity)
+        expect(body.keys).to match_array(%w[id fuel_capacity fuel_level weight_capacity pilot])
+        expect(body['id']).to eq(ship.id)
+        expect(body['fuel_level']).to eq(1)
+        expect(body['fuel_capacity']).to eq(ship.fuel_capacity)
+        expect(body['weight_capacity']).to eq(ship.weight_capacity)
       end
 
       it 'should update field fuel_level and credits' do
@@ -60,9 +58,7 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
         it 'match response body' do
           subject
 
-          body = JSON.parse(response.body).symbolize_keys
-
-          expect(body[:message]).to start_with('Couldn\'t find Ship with \'id\'=-1')
+          expect(body['message']).to start_with('Couldn\'t find Ship with \'id\'=-1')
         end
       end
 
@@ -80,8 +76,6 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
         it 'returns message error' do
           subject
 
-          body = JSON.parse(response.body)
-
           expect(body['message']).to eq('StandardError')
         end
       end
@@ -97,8 +91,6 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
 
         it 'returns message error' do
           subject
-
-          body = JSON.parse(response.body)
 
           expect(body['message']).to eq('You need to log into the system')
         end

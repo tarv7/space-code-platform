@@ -30,23 +30,19 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
       it 'returns fields if the contract' do
         subject
 
-        body = JSON.parse(response.body)
-
         expect(body.keys).to match_array(%w[id description value payload state pilot origin destiny])
       end
 
       it 'should update contract, pilot and ship' do
         subject
 
-        body = JSON.parse(response.body).deep_symbolize_keys
-
-        expect(body[:state]).to eq('finished')
+        expect(body['state']).to eq('finished')
         expect(contract.reload.state).to eq('finished')
 
-        expect(body[:pilot][:credits]).to eq(20)
+        expect(body['pilot']['credits']).to eq(20)
         expect(pilot.reload.credits).to eq(20)
 
-        expect(body[:pilot][:ships][0][:fuel_level]).to eq(9)
+        expect(body['pilot']['ships'][0]['fuel_level']).to eq(9)
         expect(ship.reload.fuel_level).to eq(9)
       end
     end
@@ -62,8 +58,6 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
         it 'returns message error' do
           subject
 
-          body = JSON.parse(response.body)
-
           expect(body['message']).to eq('You need to log into the system')
         end
       end
@@ -77,8 +71,6 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
 
         it 'returns message error' do
           subject
-
-          body = JSON.parse(response.body)
 
           expect(body['message']).to start_with('Couldn\'t find Contract with \'id\'=-1')
         end
@@ -96,8 +88,6 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
         it 'returns message error' do
           subject
 
-          body = JSON.parse(response.body)
-
           expect(body['message']).to start_with("Couldn't find Ship with 'id'=#{another_ship_id}")
         end
       end
@@ -113,8 +103,6 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
 
         it 'returns message error' do
           subject
-
-          body = JSON.parse(response.body)
 
           expect(body['message']).to eq('StandardError')
         end

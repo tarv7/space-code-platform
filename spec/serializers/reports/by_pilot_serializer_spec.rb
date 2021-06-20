@@ -46,5 +46,5 @@ RSpec.describe Reports::ByPilotSerializer do
 
   subject { described_class.new.serializable_hash }
 
-  it { expect(subject).to match(expected) }
+  it { expect(subject).to match_array(expected) }
 end
