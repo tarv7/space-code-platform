@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Pilot < ApplicationRecord
   belongs_to :location, class_name: 'Planet'
 

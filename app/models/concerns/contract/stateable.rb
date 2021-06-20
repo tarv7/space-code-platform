@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Contract < ApplicationRecord
   module Stateable
     extend ActiveSupport::Concern

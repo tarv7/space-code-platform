@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class ReportsController < ApplicationController
-      ALLOWED_TYPES = %w[by_planet by_pilot transaction]
+      ALLOWED_TYPES = %w[by_planet by_pilot transaction].freeze
 
       before_action :verify_type
 

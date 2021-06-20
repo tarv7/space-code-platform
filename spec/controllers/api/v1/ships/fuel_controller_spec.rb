@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::Ships::FuelController, type: :controller do
@@ -33,7 +35,9 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
       end
 
       it 'should update field fuel_level and credits' do
-        expect { subject }.to change { ship.reload.fuel_level }.from(0).to(1).and change { ship.pilot.reload.credits }.from(10).to(3)
+        expect { subject }.
+          to change { ship.reload.fuel_level }.from(0).to(1).
+          and change { ship.pilot.reload.credits }.from(10).to(3)
       end
 
       it 'should call business class' do
@@ -55,9 +59,9 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
 
         it 'match response body' do
           subject
-  
+
           body = JSON.parse(response.body).symbolize_keys
-  
+
           expect(body[:message]).to start_with('Couldn\'t find Ship with \'id\'=-1')
         end
       end
@@ -69,15 +73,15 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
 
         it 'returns http bad request' do
           subject
-  
+
           expect(response).to have_http_status(:bad_request)
         end
-  
+
         it 'returns message error' do
           subject
-  
+
           body = JSON.parse(response.body)
-  
+
           expect(body['message']).to eq('StandardError')
         end
       end
@@ -87,15 +91,15 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
 
         it 'returns http bad request' do
           subject
-  
+
           expect(response).to have_http_status(:bad_request)
         end
-  
+
         it 'returns message error' do
           subject
-  
+
           body = JSON.parse(response.body)
-  
+
           expect(body['message']).to eq('You need to log into the system')
         end
       end

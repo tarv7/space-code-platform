@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
 describe 'Space Code Platform' do
@@ -16,7 +18,7 @@ describe 'Space Code Platform' do
     create(:travel_route, origin: demeter, destiny: aqua, cost: 22)
     create(:travel_route, origin: demeter, destiny: calas, cost: 25)
     create(:travel_route, origin: aqua, destiny: demeter, cost: 30)
-    create(:travel_route, origin: aqua, destiny: calas, cost: 12 )
+    create(:travel_route, origin: aqua, destiny: calas, cost: 12)
     create(:travel_route, origin: calas, destiny: andvari, cost: 20)
     create(:travel_route, origin: calas, destiny: demeter, cost: 25)
     create(:travel_route, origin: calas, destiny: aqua, cost: 15)
@@ -197,7 +199,7 @@ describe 'Space Code Platform' do
         let(:params) do
           {
             id: contract.id,
-            ship_id: pilot.ships.first.id,
+            ship_id: pilot.ships.first.id
           }
         end
 
@@ -234,7 +236,7 @@ describe 'Space Code Platform' do
       parameter name: :params, in: :body, schema: {
         type: :object,
         properties: {
-          quantity: { type: :integer },
+          quantity: { type: :integer }
         },
         required: %w[quantity]
       }
@@ -272,7 +274,7 @@ describe 'Space Code Platform' do
 
       response '200', 'reports' do
         let(:type) { 'by_planet' }
-        
+
         run_test!
       end
 

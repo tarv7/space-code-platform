@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Reports
   class ByPilotSerializer
     def serializable_hash

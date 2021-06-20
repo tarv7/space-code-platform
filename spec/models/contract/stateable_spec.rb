@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Contract, 'stateable' do
@@ -29,13 +31,15 @@ RSpec.describe Contract, 'stateable' do
       context 'when the contract already has a pilot' do
         before { contract.update(pilot: build(:pilot)) }
 
-        it_behaves_like 'raise error and not change state', [Contract::EventError, 'Contract already has a pilot. Event: opened to accepted']
+        it_behaves_like 'raise error and not change state',
+                        [Contract::EventError, 'Contract already has a pilot. Event: opened to accepted']
       end
 
       context 'when no receive a valid pilot' do
         subject { contract.accept!(contract) }
 
-        it_behaves_like 'raise error and not change state', [Contract::EventError, 'Missing pilot. Event: opened to accepted']
+        it_behaves_like 'raise error and not change state',
+                        [Contract::EventError, 'Missing pilot. Event: opened to accepted']
       end
     end
   end

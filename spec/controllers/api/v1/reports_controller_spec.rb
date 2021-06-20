@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::ReportsController, type: :controller do
@@ -29,7 +31,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
     shared_examples 'returns http success' do
       it do
         subject
-  
+
         expect(response).to have_http_status(:ok)
       end
     end
@@ -76,7 +78,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
           }
         ]
       end
-      
+
       it_behaves_like 'returns http success'
       it_behaves_like 'returns response expected'
     end
@@ -124,10 +126,10 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
 
       it 'returns http success' do
         subject
-  
+
         expect(response).to have_http_status(:not_acceptable)
       end
-  
+
       it 'returns response expected' do
         subject
 

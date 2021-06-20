@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 minerals = Resource.find_or_create_by(name: 'minerals')
 water = Resource.find_or_create_by(name: 'water')
 food = Resource.find_or_create_by(name: 'food')
