@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ContractsController, type: :controller do
+RSpec.describe Api::V1::ContractsController, type: :controller do
   let!(:resource) { create(:resource) }
   let!(:origin) { create(:planet) }
   let!(:destiny) { create(:planet) }

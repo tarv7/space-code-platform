@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Contracts::OpenedsController, type: :controller do
+RSpec.describe Api::V1::Contracts::OpenedsController, type: :controller do
   let!(:openeds) { create_list(:contract, 3, :opened) }
   let!(:processings) { create_list(:contract, 4, :processing) }
   let!(:finisheds) { create_list(:contract, 5, :finished) }

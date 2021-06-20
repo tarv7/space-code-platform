@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Contracts::AcceptedsController, type: :controller do
+RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
   let!(:contract) { create(:contract, :opened) }
   let!(:pilot) { create(:pilot) }
 

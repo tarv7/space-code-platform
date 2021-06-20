@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Ships::FuelController, type: :controller do
+RSpec.describe Api::V1::Ships::FuelController, type: :controller do
   let!(:ship) { create(:ship) }
   let!(:pilot) { create(:pilot) }
 
