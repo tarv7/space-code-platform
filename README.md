@@ -16,15 +16,20 @@ You can follow the official guides for these technologies to be able to install 
 `cd space-code-platform`
 #### 3 - build the services
 `docker-compose up --build -d`
-#### 4 - Prepare the database
+#### 3 - Install gems
+`docker exec -it space-code-platform_web_1 bundle`
+#### 5 - Prepare the database
 `docker exec -it space-code-platform_web_1 rails db:create db:migrate db:seed`
-#### 5 - Active the cache for development
+#### 6 - Active the cache for development
 `docker exec -it space-code-platform_web_1 rails dev:cache`
 
 #### Some useful commands
 * `docker attach space-code-platform_web_1` for attach the rails server
 * `docker exec -it space-code-platform_web_1 rails c` for access rails console
 * `docker exec -it -e "RAILS_ENV=test" space-code-platform_web_1 rspec` to run all automated tests
+* `docker exec -it space-code-platform_web_1 rubocop` to see all warning cops
+* `docker exec -it space-code-platform_web_1 bundle-audit` to see all vulnerabilities in gems
+* `docker exec -it space-code-platform_web_1 rails rswag:specs:swaggerize` to update documentation
 
 ## Using the API
 when serving the application, by default it is available at the address: http://localhost:3000/

@@ -44,6 +44,7 @@ group :development, :test do
   gem 'irb'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'bundle-audit'
 end
 
 group :development do
