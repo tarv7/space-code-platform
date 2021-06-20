@@ -1,5 +1,5 @@
 class Pilot < ApplicationRecord
-  belongs_to :location, class_name: "Planet"
+  belongs_to :location, class_name: 'Planet'
 
   has_many :ships, dependent: :destroy
   has_many :contracts, dependent: :nullify
@@ -17,7 +17,7 @@ class Pilot < ApplicationRecord
   def check_luhn_certification
     return if Luhn.valid?(certification)
 
-    self.errors.add :certification, "Certification must follow the Luhn standard"
+    errors.add :certification, 'Certification must follow the Luhn standard'
   end
 
   def quantity_resource(resource)

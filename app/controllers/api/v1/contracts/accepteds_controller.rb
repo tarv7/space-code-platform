@@ -3,7 +3,7 @@ module Api
     module Contracts
       class AcceptedsController < ApplicationController
         before_action :user_authenticate!
-  
+
         def update
           contract.accept!(current_pilot)
 

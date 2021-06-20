@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 RSpec.describe PilotSerializer do
@@ -12,7 +11,7 @@ RSpec.describe PilotSerializer do
       credits: pilot.credits,
       location: {
         id: pilot.location.id,
-        name: pilot.location.name,
+        name: pilot.location.name
       },
       ships: [
         {

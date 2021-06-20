@@ -4,7 +4,7 @@ class RefilFuel
   class RefilFuelError < StandardError; end
 
   UNIT_COST = 7
-  
+
   def initialize(ship, fuel_quantity)
     @ship = ship
     @fuel_quantity = fuel_quantity
@@ -22,7 +22,7 @@ class RefilFuel
   end
 
   def self.call!(ship, fuel_quantity)
-    self.new(ship, fuel_quantity).call!
+    new(ship, fuel_quantity).call!
   end
 
   private

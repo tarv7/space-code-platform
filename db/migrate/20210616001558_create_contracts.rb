@@ -9,7 +9,7 @@ class CreateContracts < ActiveRecord::Migration[6.1]
       t.integer :value,           null: false
       t.references :pilot,        foreign_key: true
       t.string :state,            null: false
-      
+
       t.timestamps
     end
 

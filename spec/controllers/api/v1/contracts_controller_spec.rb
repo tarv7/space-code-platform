@@ -5,16 +5,19 @@ RSpec.describe Api::V1::ContractsController, type: :controller do
   let!(:origin) { create(:planet) }
   let!(:destiny) { create(:planet) }
 
-  describe "POST #create" do
+  describe 'POST #create' do
     let(:params) { { contract: contract_params } }
 
     subject { post :create, params: params }
 
-    context "when is successfully" do
-      let(:contract_params) { attributes_for(:contract, payload_id: resource.id, origin_id: origin.id, destiny_id: destiny.id) }
+    context 'when is successfully' do
+      let(:contract_params) do
+        attributes_for(:contract, payload_id: resource.id, origin_id: origin.id, destiny_id: destiny.id)
+      end
+
       let(:expected_response) { contract_params }
 
-      it "returns http success" do
+      it 'returns http success' do
         subject
 
         expect(response).to have_http_status(:created)
@@ -32,10 +35,10 @@ RSpec.describe Api::V1::ContractsController, type: :controller do
       end
     end
 
-    context "when is fail" do
+    context 'when is fail' do
       let(:contract_params) { attributes_for(:contract) }
 
-      it "returns http bad_request" do
+      it 'returns http bad_request' do
         subject
 
         expect(response).to have_http_status(:bad_request)

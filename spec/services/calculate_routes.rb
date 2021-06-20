@@ -14,7 +14,7 @@ RSpec.describe CalculateRoutes, type: :model do
     create(:travel_route, origin: demeter, destiny: aqua, cost: 22)
     create(:travel_route, origin: demeter, destiny: calas, cost: 25)
     create(:travel_route, origin: aqua, destiny: demeter, cost: 30)
-    create(:travel_route, origin: aqua, destiny: calas, cost: 12 )
+    create(:travel_route, origin: aqua, destiny: calas, cost: 12)
     create(:travel_route, origin: calas, destiny: andvari, cost: 20)
     create(:travel_route, origin: calas, destiny: demeter, cost: 25)
     create(:travel_route, origin: calas, destiny: aqua, cost: 15)
@@ -23,22 +23,22 @@ RSpec.describe CalculateRoutes, type: :model do
   describe '#best_path' do
     let(:expected) do
       {
-        { "Andvari" => "Aqua" } => { cost: 13, path: ["Andvari", "Aqua"] },
-        { "Andvari" => "Calas" } => { cost: 23, path: ["Andvari", "Calas"] },
-        { "Demeter" => "Aqua" } => { cost: 22, path: ["Demeter", "Aqua"] },
-        { "Demeter" => "Calas" } => { cost: 25, path: ["Demeter", "Calas"] },
-        { "Aqua" => "Demeter" } => { cost: 30, path: ["Aqua", "Demeter"] },
-        { "Aqua" => "Calas" } => { cost: 12, path: ["Aqua", "Calas"] },
-        { "Calas" => "Andvari" } => { cost: 20, path: ["Calas", "Andvari"] },
-        { "Calas" => "Demeter" } => { cost: 25, path: ["Calas", "Demeter"] },
-        { "Calas" => "Aqua" } => { cost: 15, path: ["Calas", "Aqua"] },
-        { "Andvari" => "Andvari" } => { cost: 0, path: ["Andvari"] },
-        { "Andvari" => "Demeter" } => { cost: 43, path: ["Andvari", "Aqua", "Demeter"] },
-        { "Demeter" => "Andvari" } => { cost: 45, path: ["Demeter", "Calas", "Andvari"] },
-        { "Demeter" => "Demeter" } => { cost: 0, path: ["Demeter"] },
-        { "Aqua" => "Andvari" } => { cost: 32, path: ["Aqua", "Calas", "Andvari"] },
-        { "Aqua" => "Aqua" } => { cost: 0, path: ["Aqua"] },
-        { "Calas" => "Calas" } => { cost: 0, path: ["Calas"] }
+        { 'Andvari' => 'Aqua' } => { cost: 13, path: %w[Andvari Aqua] },
+        { 'Andvari' => 'Calas' } => { cost: 23, path: %w[Andvari Calas] },
+        { 'Demeter' => 'Aqua' } => { cost: 22, path: %w[Demeter Aqua] },
+        { 'Demeter' => 'Calas' } => { cost: 25, path: %w[Demeter Calas] },
+        { 'Aqua' => 'Demeter' } => { cost: 30, path: %w[Aqua Demeter] },
+        { 'Aqua' => 'Calas' } => { cost: 12, path: %w[Aqua Calas] },
+        { 'Calas' => 'Andvari' } => { cost: 20, path: %w[Calas Andvari] },
+        { 'Calas' => 'Demeter' } => { cost: 25, path: %w[Calas Demeter] },
+        { 'Calas' => 'Aqua' } => { cost: 15, path: %w[Calas Aqua] },
+        { 'Andvari' => 'Andvari' } => { cost: 0, path: ['Andvari'] },
+        { 'Andvari' => 'Demeter' } => { cost: 43, path: %w[Andvari Aqua Demeter] },
+        { 'Demeter' => 'Andvari' } => { cost: 45, path: %w[Demeter Calas Andvari] },
+        { 'Demeter' => 'Demeter' } => { cost: 0, path: ['Demeter'] },
+        { 'Aqua' => 'Andvari' } => { cost: 32, path: %w[Aqua Calas Andvari] },
+        { 'Aqua' => 'Aqua' } => { cost: 0, path: ['Aqua'] },
+        { 'Calas' => 'Calas' } => { cost: 0, path: ['Calas'] }
       }
     end
 

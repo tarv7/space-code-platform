@@ -7,7 +7,7 @@ module Reports
 
         Resource.all.each do |resource|
           quantity = pilot.quantity_resource(resource)
-          
+
           hash[pilot.name.to_sym][resource.name.to_sym] = quantity if quantity.positive?
         end
 

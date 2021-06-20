@@ -10,7 +10,7 @@ class Contract < ApplicationRecord
       aasm column: 'state' do
         state :opened, initial: true
         state :accepted, :processing, :finished
-    
+
         event :accept do
           before :before_accept_event
           after_commit :after_accepted
@@ -38,25 +38,25 @@ class Contract < ApplicationRecord
       #
 
       def before_accept_event(pilot)
-        raise EventError, "Contract already has a pilot. Event: opened to accepted" if self.pilot.present?
-        raise EventError, "Missing pilot. Event: opened to accepted" unless pilot.is_a?(Pilot)
+        raise EventError, 'Contract already has a pilot. Event: opened to accepted' if self.pilot.present?
+        raise EventError, 'Missing pilot. Event: opened to accepted' unless pilot.is_a?(Pilot)
 
         self.pilot = pilot
       end
 
       def after_accepted(_)
-        self.reports.create(description: "#{self.description} was accepted")
-        self.pilot.reports.create(description: "#{self.pilot.name} accepted the contract")
+        reports.create(description: "#{description} was accepted")
+        pilot.reports.create(description: "#{pilot.name} accepted the contract")
       end
 
       def after_processing(path)
-        self.reports.create(description: "#{self.description} is on transport route. path: #{path.join(' -> ')}")
+        reports.create(description: "#{description} is on transport route. path: #{path.join(' -> ')}")
       end
 
       def after_finished
-        self.reports.create(description: "#{self.description} was finished")
-        self.reports.create(description: "#{self.description} paid: -₭#{self.value}")
-        self.pilot.reports.create(description: "#{self.pilot.name} received: -₭#{self.value}")
+        reports.create(description: "#{description} was finished")
+        reports.create(description: "#{description} paid: -₭#{value}")
+        pilot.reports.create(description: "#{pilot.name} received: -₭#{value}")
       end
     end
   end

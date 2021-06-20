@@ -3,7 +3,7 @@ module Api
     module Ships
       class FuelController < ApplicationController
         before_action :user_authenticate!
-  
+
         def update
           RefilFuel.call!(ship, fuel_params[:quantity].to_i)
 

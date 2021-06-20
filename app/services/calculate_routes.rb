@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CalculateRoutes
-  KEY_CACHE_BEST_PATHS = "CalculateRoutes#best_paths"
+  KEY_CACHE_BEST_PATHS = 'CalculateRoutes#best_paths'
   INFINITE = (1 << (1.size * 8 - 1)) - 1 # 9223372036854775807
 
   def initialize
@@ -18,7 +18,7 @@ class CalculateRoutes
   end
 
   def self.best_path(origin:, destiny:)
-    self.new.best_path(origin: origin, destiny: destiny)
+    new.best_path(origin: origin, destiny: destiny)
   end
 
   private
@@ -61,11 +61,10 @@ class CalculateRoutes
           origin_sub     = @costs[{ origin => sub_planet }]
           sub_destiny    = @costs[{ sub_planet => destiny }]
 
-          if origin_sub + sub_destiny < origin_destiny
-            @costs[{ origin => destiny }] = origin_sub + sub_destiny
+          next unless origin_sub + sub_destiny < origin_destiny
 
-            @sub_paths[{ origin => destiny }] = @sub_paths[{ sub_planet => destiny }]
-          end
+          @costs[{ origin => destiny }] = origin_sub + sub_destiny
+          @sub_paths[{ origin => destiny }] = @sub_paths[{ sub_planet => destiny }]
         end
       end
     end
@@ -96,12 +95,10 @@ class CalculateRoutes
   end
 
   def travel_routes
-    @_travel_routes ||= begin
-      TravelRoute.all.includes(:origin, :destiny).map do |r|
-        {
-          { r.origin.name => r.destiny.name } => r.cost
-        }
-      end
+    @_travel_routes ||= TravelRoute.all.includes(:origin, :destiny).map do |r|
+      {
+        { r.origin.name => r.destiny.name } => r.cost
+      }
     end
   end
 end
