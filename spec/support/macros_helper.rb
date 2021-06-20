@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Macros
   def body
     ActiveSupport::JSON.decode(response.body)

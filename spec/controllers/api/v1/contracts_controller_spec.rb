@@ -47,7 +47,8 @@ RSpec.describe Api::V1::ContractsController, type: :controller do
       it 'match response body' do
         subject
 
-        expect(body).to match('message' => 'Validation failed: Payload must exist, Origin must exist, Destiny must exist')
+        expect(body).
+          to match('message' => 'Validation failed: Payload must exist, Origin must exist, Destiny must exist')
       end
     end
   end
