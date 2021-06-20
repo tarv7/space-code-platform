@@ -229,7 +229,7 @@ describe 'Space Code Platform' do
       tags 'Refil Fuel'
       consumes 'application/json', 'application/xml'
 
-      #parameter name: :quantity, in: :body, schema: { type: :integer }
+      parameter name: :'auth-pilot-id', in: :header, schema: { type: :string }
       parameter name: :id, in: :path, schema: { type: :integer }
       parameter name: :params, in: :body, schema: {
         type: :object,
@@ -242,6 +242,7 @@ describe 'Space Code Platform' do
       response '200', 'filled fuel' do
         before { pilot.ships.first.update(fuel_level: 10, fuel_capacity: 100) }
 
+        let(:'auth-pilot-id') { pilot.id }
         let(:pilot) { create(:pilot_with_ships) }
 
         let(:id) { pilot.ships.first.id }
@@ -253,6 +254,7 @@ describe 'Space Code Platform' do
       response '400', 'bad request' do
         let(:pilot) { create(:pilot_with_ships) }
 
+        let(:'auth-pilot-id') { pilot.id }
         let(:id) { pilot.ships.first.id }
         let(:params) { { quantity: 100 } }
 

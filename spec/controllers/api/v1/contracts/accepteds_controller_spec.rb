@@ -49,11 +49,13 @@ RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
   
           body = JSON.parse(response.body)
   
-          expect(body["message"]).to eq("Couldn't find Pilot with 'id'=0")
+          expect(body["message"]).to eq("You need to log into the system")
         end
       end
 
       context "when contract is not valid" do
+        before { request.headers["auth-pilot-id"] = pilot.id.to_s }
+
         subject { patch :update, params: { id: -1 } }
 
         it "returns http bad request (400)" do

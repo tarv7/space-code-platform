@@ -62,7 +62,7 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
 
           body = JSON.parse(response.body)
 
-          expect(body["message"]).to eq("Couldn't find Pilot with 'id'=0")
+          expect(body["message"]).to eq("You need to log into the system")
         end
       end
 

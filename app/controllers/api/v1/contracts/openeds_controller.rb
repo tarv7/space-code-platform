@@ -1,7 +1,7 @@
 module Api
   module V1
     module Contracts
-      class OpenedsController < ContractsController
+      class OpenedsController < ApplicationController
         def index
           contracts = Contract.opened
 

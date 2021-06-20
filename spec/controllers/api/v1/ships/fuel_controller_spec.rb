@@ -5,12 +5,14 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
   let!(:pilot) { create(:pilot) }
 
   describe "PATCH #update" do
+    before { request.headers["auth-pilot-id"] = pilot.id.to_s }
+
     let(:params) { { id: ship.id, quantity: 1 } }
 
     subject { patch :update, params: params }
 
     context "when is successfully" do
-      let!(:ship) { create(:ship, fuel_level: 0) }
+      let!(:ship) { create(:ship, pilot: pilot, fuel_level: 0) }
 
       it 'returns http code ok' do
         subject
@@ -56,11 +58,13 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
   
           body = JSON.parse(response.body).symbolize_keys
   
-          expect(body).to match(message: 'Couldn\'t find Ship with \'id\'=-1')
+          expect(body[:message]).to start_with('Couldn\'t find Ship with \'id\'=-1')
         end
       end
 
       context "when event raise error" do
+        let!(:ship) { create(:ship, pilot: pilot) }
+
         before { allow(RefilFuel).to receive(:call!).and_raise(StandardError) }
 
         it "returns http bad request" do
@@ -75,6 +79,24 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
           body = JSON.parse(response.body)
   
           expect(body["message"]).to eq("StandardError")
+        end
+      end
+
+      context "when user is not logged" do
+        before { request.headers["auth-pilot-id"] = nil }
+
+        it "returns http bad request" do
+          subject
+  
+          expect(response).to have_http_status(:bad_request)
+        end
+  
+        it 'returns message error' do
+          subject
+  
+          body = JSON.parse(response.body)
+  
+          expect(body["message"]).to eq("You need to log into the system")
         end
       end
     end

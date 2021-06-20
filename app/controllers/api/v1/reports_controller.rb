@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ReportsController < ContractsController
+    class ReportsController < ApplicationController
       ALLOWED_TYPES = %w[by_planet by_pilot transaction]
 
       before_action :verify_type
