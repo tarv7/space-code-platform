@@ -34,6 +34,8 @@ You can follow the official guides for these technologies to be able to install 
 ## Using the API
 when serving the application, by default it is available at the address: http://localhost:3000/
 ### List enpoints availables
+* GET /api/v1/planets
+* GET /api/v1/travel_routes
 * POST /api/v1/pilots
 * POST /api/v1/contracts
 * GET /api/v1/contracts/opened

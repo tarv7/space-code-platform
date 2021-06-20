@@ -1,9 +1,25 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: Space Code Platform API V1
   version: v1
 paths:
+  "/api/v1/planets":
+    get:
+      summary: List all planets
+      tags:
+      - Planet
+      responses:
+        '200':
+          description: openeds
+  "/api/v1/travel_routes":
+    get:
+      summary: List all travel routes with cost and paths
+      tags:
+      - Travel route
+      responses:
+        '200':
+          description: openeds
   "/api/v1/pilots":
     post:
       summary: Add pilots and their ships to the system
@@ -23,7 +39,6 @@ paths:
               properties:
                 name:
                   type: string
-                  value: hehehe
                 certification:
                   type: string
                 age:
@@ -61,7 +76,6 @@ paths:
               properties:
                 name:
                   type: string
-                  value: hehehe
                 certification:
                   type: string
                 age:
