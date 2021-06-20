@@ -10,7 +10,7 @@ class Pilot < ApplicationRecord
   validates_presence_of :certification, :name, :age, :credits
   validates :certification, uniqueness: true, length: { is: 7 }
   validates :name, length: { in: 2..255 }
-  validates :age, numericality: { greater_than: 0 }
+  validates :age, numericality: { greater_than_or_equal_to: 18 }
   validates :credits, numericality: { greater_than_or_equal_to: 0 }
   validate :validate_luhn_certification
 

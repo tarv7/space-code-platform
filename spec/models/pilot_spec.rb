@@ -21,8 +21,8 @@ RSpec.describe Pilot, type: :model do
     it { should validate_uniqueness_of(:certification).case_insensitive }
     it { should validate_length_of(:certification).is_equal_to(7) }
     it { should validate_length_of(:name).is_at_least(2).is_at_most(255) }
-    it { should validate_length_of(:age).is_at_least(0) }
-    it { should validate_length_of(:credits).is_at_least(0) }
+    it { should validate_numericality_of(:age).is_greater_than_or_equal_to(18) }
+    it { should validate_numericality_of(:credits).is_greater_than_or_equal_to(0) }
 
     describe 'Check Certification in Luhn standard' do
       context 'when is valid' do
