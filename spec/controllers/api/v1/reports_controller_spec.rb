@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ReportsController, type: :controller do
+RSpec.describe Api::V1::ReportsController, type: :controller do
   let(:planet_1) { create(:planet, name: "planet 1") }
   let(:planet_2) { create(:planet, name: "planet 2") }
   let(:pilot_1) { create(:pilot, name: "Pilot 1", location: planet_1) }

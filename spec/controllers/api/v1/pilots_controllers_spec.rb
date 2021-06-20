@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PilotsController, type: :controller do
+RSpec.describe Api::V1::PilotsController, type: :controller do
   let(:planet) { create(:planet) }
 
   describe "POST #create" do

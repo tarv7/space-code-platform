@@ -22,7 +22,7 @@ describe 'Space Code Platform' do
     create(:travel_route, origin: calas, destiny: aqua, cost: 15)
   end
 
-  path '/pilots' do
+  path '/api/v1/pilots' do
     post 'Add pilots and their ships to the system' do
       tags 'Pilot'
       consumes 'application/json', 'application/xml'
@@ -79,9 +79,9 @@ describe 'Space Code Platform' do
         run_test!
       end
     end
-  end # POST /pilots - Add pilots and their ships to the system.
+  end # POST /api/v1/pilots - Add pilots and their ships to the system.
 
-  path '/contracts' do
+  path '/api/v1/contracts' do
     post 'Publish transport contracts' do
       tags 'Contract'
       consumes 'application/json', 'application/xml'
@@ -128,9 +128,9 @@ describe 'Space Code Platform' do
         run_test!
       end
     end
-  end # POST /contracts - Publish transport contracts
+  end # POST /api/v1/contracts - Publish transport contracts
 
-  path '/contracts/opened' do
+  path '/api/v1/contracts/opened' do
     get 'List open contracts' do
       tags 'Open Contracts'
       consumes 'application/json', 'application/xml'
@@ -139,9 +139,9 @@ describe 'Space Code Platform' do
         run_test!
       end
     end
-  end # GET /contracts/opened - List open contracts
+  end # GET /api/v1/contracts/opened - List open contracts
 
-  path '/contracts/{id}/accept' do
+  path '/api/v1/contracts/{id}/accept' do
     patch 'Accept transport contracts' do
       tags 'Accept Contracts'
       consumes 'application/json', 'application/xml'
@@ -171,9 +171,9 @@ describe 'Space Code Platform' do
         run_test!
       end
     end
-  end # PATCH /contracts/{id}/accept - Accept transport contracts
+  end # PATCH /api/v1/contracts/{id}/accept - Accept transport contracts
 
-  path '/travels' do
+  path '/api/v1/travels' do
     post 'Travel between planets and Grant credits to the pilot after fulfilling the contract' do
       tags 'Travel'
       consumes 'application/json', 'application/xml'
@@ -222,9 +222,9 @@ describe 'Space Code Platform' do
         run_test!
       end
     end
-  end # POST /travels - Travel between planets and Grant credits to the pilot after fulfilling the contract
+  end # POST /api/v1/travels - Travel between planets and Grant credits to the pilot after fulfilling the contract
 
-  path '/ships/{id}/fuel' do
+  path '/api/v1/ships/{id}/fuel' do
     patch 'Register a refill of the fuel' do
       tags 'Refil Fuel'
       consumes 'application/json', 'application/xml'
@@ -259,9 +259,9 @@ describe 'Space Code Platform' do
         run_test!
       end
     end
-  end # PATCH /ships/{id}/fuel - Register a refill of the fuel
+  end # PATCH /api/v1/ships/{id}/fuel - Register a refill of the fuel
 
-  path '/reports' do
+  path '/api/v1/reports' do
     get 'Reports' do
       tags 'Reports'
       consumes 'application/json', 'application/xml'
@@ -280,5 +280,5 @@ describe 'Space Code Platform' do
         run_test!
       end
     end
-  end # GET /reports - Reports
+  end # GET /api/v1/reports - Reports
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TravelsController, type: :controller do
+RSpec.describe Api::V1::TravelsController, type: :controller do
   let(:pilot) { create(:pilot_with_ships, location: planet_1) }
   let(:ship) { pilot.ship }
   let!(:contract) { create(:contract, :accepted, pilot: pilot, origin: planet_1, destiny: planet_2, value: 10, payload_weight: 1) }

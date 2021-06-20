@@ -4,7 +4,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/pilots":
+  "/api/v1/pilots":
     post:
       summary: Add pilots and their ships to the system
       tags:
@@ -93,7 +93,7 @@ paths:
               - credits
               - payload_id
               - ships_attributes
-  "/contracts":
+  "/api/v1/contracts":
     post:
       summary: Publish transport contracts
       tags:
@@ -150,7 +150,7 @@ paths:
               - payload_id
               - origin_id
               - destiny_id
-  "/contracts/opened":
+  "/api/v1/contracts/opened":
     get:
       summary: List open contracts
       tags:
@@ -158,7 +158,7 @@ paths:
       responses:
         '200':
           description: openeds
-  "/contracts/{id}/accept":
+  "/api/v1/contracts/{id}/accept":
     patch:
       summary: Accept transport contracts
       tags:
@@ -178,7 +178,7 @@ paths:
           description: accepted
         '400':
           description: bad request
-  "/travels":
+  "/api/v1/travels":
     post:
       summary: Travel between planets and Grant credits to the pilot after fulfilling
         the contract
@@ -218,7 +218,7 @@ paths:
               required:
               - id
               - ship_id
-  "/ships/{id}/fuel":
+  "/api/v1/ships/{id}/fuel":
     patch:
       summary: Register a refill of the fuel
       tags:
@@ -252,7 +252,7 @@ paths:
                   type: integer
               required:
               - quantity
-  "/reports":
+  "/api/v1/reports":
     get:
       summary: Reports
       tags:

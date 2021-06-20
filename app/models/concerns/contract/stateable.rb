@@ -50,7 +50,7 @@ class Contract < ApplicationRecord
       end
 
       def after_processing(path)
-        self.reports.create(description: "#{self.description} is on transport route. #{path}")
+        self.reports.create(description: "#{self.description} is on transport route. path: #{path.join(' -> ')}")
       end
 
       def after_finished
