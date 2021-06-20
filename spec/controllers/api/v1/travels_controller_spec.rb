@@ -78,7 +78,7 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
 
           body = JSON.parse(response.body)
 
-          expect(body['message']).to start_with("Couldn't find Contract with 'id'=-1")
+          expect(body['message']).to start_with('Couldn\'t find Contract with \'id\'=-1')
         end
       end
 

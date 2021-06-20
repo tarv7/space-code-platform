@@ -53,7 +53,7 @@ describe 'Space Code Platform' do
       response '201', 'pilot and ships createds' do
         let(:pilot) do
           {
-            name: "Pilot Valid",
+            name: 'Pilot Valid',
             certification: Luhn.generate(7),
             age: 40,
             credits: 13,
@@ -68,7 +68,7 @@ describe 'Space Code Platform' do
       response '400', 'bad request' do
         let(:pilot) do
           {
-            name: "Pilot Valid",
+            name: 'Pilot Valid',
             certification: Luhn.generate(6),
             age: -40,
             credits: -13,
@@ -101,7 +101,7 @@ describe 'Space Code Platform' do
       response '201', 'contract created' do
         let(:contract) do
           {
-            description: "Description",
+            description: 'Description',
             value: 40,
             payload_weight: 13,
             payload_id: water.id,
@@ -116,7 +116,7 @@ describe 'Space Code Platform' do
       response '400', 'bad request' do
         let(:contract) do
           {
-            description: "Test invalid",
+            description: 'Test invalid',
             value: -9,
             payload_weight: 13,
             payload_id: 1,

@@ -69,7 +69,7 @@ RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
 
           body = JSON.parse(response.body)
 
-          expect(body['message']).to eq("Couldn't find Contract with 'id'=-1")
+          expect(body['message']).to eq('Couldn\'t find Contract with \'id\'=-1')
         end
       end
 
