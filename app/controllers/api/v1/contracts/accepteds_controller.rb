@@ -15,7 +15,7 @@ module Api
         private
 
         def contract
-          @_contract ||= Contract.find(contract_params[:id])
+          @_contract ||= Contract.opened.find(contract_params[:id])
         end
 
         def contract_params

@@ -57,7 +57,6 @@ describe 'Space Code Platform' do
           certification: { type: :string },
           age: { type: :integer },
           credits: { type: :integer },
-          payload_id: { type: :integer },
           location_id: { type: :integer },
           ships_attributes: {
             type: :array,

@@ -13,7 +13,7 @@ module Reports
   class ByPilotSerializer
     def serializable_hash
       Pilot.all.inject([]) do |array, pilot|
-        hash ||= {}
+        hash = {}
         hash[pilot.name.to_sym] ||= {}
 
         Resource.all.each do |resource|
