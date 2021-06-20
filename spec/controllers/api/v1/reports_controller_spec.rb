@@ -123,9 +123,9 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
       let(:type) { 'transaction' }
       let(:expected) do
         [
-          report_2.description,
-          report_1.description,
-          report_3.description
+          "#{report_2.reportable_type} ##{report_2.reportable_id}: #{report_2.description}",
+          "#{report_1.reportable_type} ##{report_1.reportable_id}: #{report_1.description}",
+          "#{report_3.reportable_type} ##{report_3.reportable_id}: #{report_3.description}"
         ]
       end
 
@@ -145,7 +145,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
       it 'returns response expected' do
         subject
 
-        expect(body).to match({ 'message' => 'Type no exists' })
+        expect(body).to match({ 'message' => 'Type does not exist' })
       end
     end
   end

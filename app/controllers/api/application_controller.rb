@@ -11,7 +11,7 @@ module Api
     def user_authenticate!
       current_pilot.present?
     rescue ActiveRecord::RecordNotFound
-      raise AuthenticateError, 'You need to log into the system'
+      raise AuthenticateError, I18n.t('errors.need_log_into')
     end
 
     def current_pilot

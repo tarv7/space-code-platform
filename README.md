@@ -16,11 +16,9 @@ You can follow the official guides for these technologies to be able to install 
 `cd space-code-platform`
 #### 3 - build the services
 `docker-compose up --build -d`
-#### 3 - Install gems
-`docker exec -it space-code-platform_web_1 bundle`
-#### 5 - Prepare the database
+#### 4 - Prepare the database
 `docker exec -it space-code-platform_web_1 rails db:create db:migrate db:seed`
-#### 6 - Active the cache for development
+#### 5 - Active the cache for development
 `docker exec -it space-code-platform_web_1 rails dev:cache`
 
 #### Some useful commands

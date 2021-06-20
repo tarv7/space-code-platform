@@ -16,7 +16,7 @@ module Api
       def verify_type
         return if ALLOWED_TYPES.include?(report_params[:type])
 
-        render json: { message: 'Type no exists' }, status: :not_acceptable
+        render json: { message: I18n.t('errors.report.type_not_exists') }, status: :not_acceptable
       end
 
       def serialized_report

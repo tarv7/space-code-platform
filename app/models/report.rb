@@ -6,4 +6,8 @@ class Report < ApplicationRecord
   default_scope { order(created_at: :asc) }
 
   validates :description, presence: true, length: { in: 2..5000 }
+
+  def to_string
+    "#{reportable_type} ##{reportable_id}: #{description}"
+  end
 end

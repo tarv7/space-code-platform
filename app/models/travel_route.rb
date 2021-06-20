@@ -6,11 +6,11 @@ class TravelRoute < ApplicationRecord
 
   validates :cost, presence: true, numericality: { greater_than: 0 }
 
-  after_save :clear_cache
+  after_save :clear_cache_best_paths
 
   private
 
-  def clear_cache
+  def clear_cache_best_paths
     Rails.cache.delete(CalculateRoutes::KEY_CACHE_BEST_PATHS)
   end
 end

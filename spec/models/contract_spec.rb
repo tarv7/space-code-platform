@@ -19,6 +19,14 @@ RSpec.describe Contract, type: :model do
     it { should validate_length_of(:description).is_at_least(0).is_at_most(5000) }
     it { should validate_length_of(:payload_weight).is_at_least(0) }
     it { should validate_length_of(:value).is_at_least(0) }
+
+    it 'returns error when planets are same' do
+      planet = create(:planet)
+      contract = build(:contract, origin: planet, destiny: planet)
+
+      expect(contract).to be_invalid
+      expect(contract.errors.messages[:destiny]).to containing_exactly('is the same as the origin')
+    end
   end
 
   describe 'callbacks' do

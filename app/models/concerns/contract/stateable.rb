@@ -40,25 +40,31 @@ class Contract < ApplicationRecord
       #
 
       def before_accept_event(pilot)
-        raise EventError, 'Contract already has a pilot. Event: opened to accepted' if self.pilot.present?
-        raise EventError, 'Missing pilot. Event: opened to accepted' unless pilot.is_a?(Pilot)
+        raise EventError, I18n.t('activerecord.errors.contract.pilot_already') if self.pilot.present?
+        raise EventError, I18n.t('activerecord.errors.contract.missing_pilot') unless pilot.is_a?(Pilot)
 
         self.pilot = pilot
       end
 
       def after_accepted(_)
-        reports.create(description: "#{description} was accepted")
-        pilot.reports.create(description: "#{pilot.name} accepted the contract")
+        reports.create(description: I18n.t('report.description.contract.was_accepted', description: description))
+        pilot.reports.create(
+          description: I18n.t('report.description.pilot.was_accepted', pilot: pilot.name, contract_id: id)
+        )
       end
 
       def after_processing(path)
-        reports.create(description: "#{description} is on transport route. path: #{path.join(' -> ')}")
+        path = path.join(' -> ')
+
+        reports.create(
+          description: I18n.t('report.description.contract.processing', description: description, path: path)
+        )
       end
 
       def after_finished
-        reports.create(description: "#{description} was finished")
-        reports.create(description: "#{description} paid: -₭#{value}")
-        pilot.reports.create(description: "#{pilot.name} received: -₭#{value}")
+        reports.create(description: I18n.t('report.description.contract.was_finished', description: description))
+        reports.create(description: I18n.t('report.description.contract.paid', description: description, value: value))
+        pilot.reports.create(description: I18n.t('report.description.pilot.received', pilot: pilot.name, value: value))
       end
     end
   end

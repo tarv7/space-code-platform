@@ -12,7 +12,7 @@ class RefilFuel
   end
 
   def call!
-    raise RefilFuelError, 'Amount of refill needs to be positive' unless fuel_quantity.positive?
+    raise RefilFuelError, I18n.t('errors.refil_fuel.need_be_positive') unless fuel_quantity.positive?
 
     Ship.transaction do
       ship.pilot.update!(credits: new_credits)
@@ -31,7 +31,9 @@ class RefilFuel
   attr_accessor :ship, :fuel_quantity
 
   def create_report
-    ship.pilot.reports.create(description: "#{ship.pilot.name} bought: -₭#{decrease_credits}")
+    ship.pilot.reports.create(
+      description: I18n.t('report.description.pilot.bought', pilot: ship.pilot.name, value: decrease_credits)
+    )
   end
 
   def new_fuel
