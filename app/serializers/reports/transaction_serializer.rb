@@ -11,7 +11,7 @@
 module Reports
   class TransactionSerializer
     def serializable_hash
-      Report.pluck(:description)
+      Report.all.map(&:to_string)
     end
   end
 end

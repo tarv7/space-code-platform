@@ -35,6 +35,6 @@ Contract.find_or_create_by(payload: minerals, payload_weight: 20, origin: aqua, 
 Contract.find_or_create_by(payload: water, payload_weight: 25, origin: andvari, destiny: demeter, value: 10,
                            state: 'finished', pilot: cassiano)
 
-Report.find_or_create_by(reportable: Contract.second, description: 'Contract 2 Description paid: -₭936')
-Report.find_or_create_by(reportable: Contract.third, description: 'Contract 3 Description paid: -₭1200')
-Report.find_or_create_by(reportable: Pilot.first, description: 'Han Solo bought fuel: +₭210')
+Report.find_or_create_by(reportable: Contract.second, description: 'Contract #1: Description paid: -₭936')
+Report.find_or_create_by(reportable: Contract.third, description: 'Contract #2: Description paid: -₭1200')
+Report.find_or_create_by(reportable: Pilot.first, description: 'Pilot #1: Han Solo bought fuel: +₭210')

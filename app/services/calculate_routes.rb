@@ -4,7 +4,7 @@
 # The class was implemented based on the classic Floyd Warshall algorithm.
 class CalculateRoutes
   KEY_CACHE_BEST_PATHS = 'CalculateRoutes#best_paths'
-  INFINITE = (1 << (1.size * 8 - 1)) - 1 # 9223372036854775807
+  INFINITE = (1 << (1.size * 8 - 1)) - 1 # 9_223_372_036_854_775_807
 
   def initialize
     @costs = {}
