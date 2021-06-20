@@ -23,12 +23,12 @@ class Contract < ApplicationRecord
   def validate_same_planets
     return if origin != destiny
 
-    errors.add(:destiny, 'is the same as the origin')
+    errors.add(:destiny, I18n.t('activerecord.errors.contract.same_planets'))
   end
 
   def report_opened
     return unless opened?
 
-    reports.create(description: "#{description} was opened")
+    reports.create(description: I18n.t('report.description.contract.was_opened', description: description))
   end
 end

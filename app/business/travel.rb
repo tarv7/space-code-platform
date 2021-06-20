@@ -11,9 +11,9 @@ class Travel
   end
 
   def call!
-    raise TravelError, 'There is no route between origin and destination' if cost >= CalculateRoutes::INFINITE
-    raise TravelError, 'Fuel level is low' if ship.fuel_level < cost
-    raise TravelError, 'Payload weight is greater than ship capacity' if ship.weight_capacity < contract.payload_weight
+    raise TravelError, I18n.t('errors.travel.no_exists_route') if cost >= CalculateRoutes::INFINITE
+    raise TravelError, I18n.t('errors.ship.fuel_level_low') if ship.fuel_level < cost
+    raise TravelError, I18n.t('errors.ship.payload_weight_greater') if ship.weight_capacity < contract.payload_weight
 
     travel
   end

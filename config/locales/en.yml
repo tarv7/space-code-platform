@@ -30,4 +30,36 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      contract:
+        same_planets: 'is the same as the origin'
+        pilot_already: 'Contract already has a pilot. Event: opened to accepted'
+        missing_pilot: 'Missing pilot. Event: opened to accepted'
+      pilot:
+        luhn_certification: 'Certification must follow the Luhn standard'
+
+  errors:
+    need_log_into: 'You need to log into the system'
+    refil_fuel:
+      need_be_positive: 'Amount of refill needs to be positive'
+    travel:
+      no_exists_route: 'There is no route between origin and destination'
+    ship:
+      fuel_level_low: 'Fuel level is low'
+      payload_weight_greater: 'Payload weight is greater than ship capacity'
+    report:
+      type_not_exists: 'Type does not exist'
+
+  report:
+    description:
+      contract:
+        was_opened: "%{description} was opened"
+        was_accepted: "%{description} was accepted"
+        processing: "%{description} is on transport route. path: %{path}"
+        was_finished: "%{description} was finished"
+        paid: "%{description} paid: -₭%{value}"
+      pilot:
+        was_accepted: "%{pilot} accepted the contract #%{contract_id}"
+        received: "%{pilot} received: -₭%{value}"
+        bought: "%{pilot} bought: -₭%{value}"

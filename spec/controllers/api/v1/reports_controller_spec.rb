@@ -145,7 +145,7 @@ RSpec.describe Api::V1::ReportsController, type: :controller do
       it 'returns response expected' do
         subject
 
-        expect(body).to match({ 'message' => 'Type no exists' })
+        expect(body).to match({ 'message' => 'Type does not exist' })
       end
     end
   end
