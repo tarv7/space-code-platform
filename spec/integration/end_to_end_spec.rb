@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
 describe 'Space Code Platform' do
@@ -16,7 +18,7 @@ describe 'Space Code Platform' do
     create(:travel_route, origin: demeter, destiny: aqua, cost: 22)
     create(:travel_route, origin: demeter, destiny: calas, cost: 25)
     create(:travel_route, origin: aqua, destiny: demeter, cost: 30)
-    create(:travel_route, origin: aqua, destiny: calas, cost: 12 )
+    create(:travel_route, origin: aqua, destiny: calas, cost: 12)
     create(:travel_route, origin: calas, destiny: andvari, cost: 20)
     create(:travel_route, origin: calas, destiny: demeter, cost: 25)
     create(:travel_route, origin: calas, destiny: aqua, cost: 15)
@@ -53,7 +55,7 @@ describe 'Space Code Platform' do
       response '201', 'pilot and ships createds' do
         let(:pilot) do
           {
-            name: "Pilot Valid",
+            name: 'Pilot Valid',
             certification: Luhn.generate(7),
             age: 40,
             credits: 13,
@@ -68,7 +70,7 @@ describe 'Space Code Platform' do
       response '400', 'bad request' do
         let(:pilot) do
           {
-            name: "Pilot Valid",
+            name: 'Pilot Valid',
             certification: Luhn.generate(6),
             age: -40,
             credits: -13,
@@ -101,7 +103,7 @@ describe 'Space Code Platform' do
       response '201', 'contract created' do
         let(:contract) do
           {
-            description: "Description",
+            description: 'Description',
             value: 40,
             payload_weight: 13,
             payload_id: water.id,
@@ -116,7 +118,7 @@ describe 'Space Code Platform' do
       response '400', 'bad request' do
         let(:contract) do
           {
-            description: "Test invalid",
+            description: 'Test invalid',
             value: -9,
             payload_weight: 13,
             payload_id: 1,
@@ -197,7 +199,7 @@ describe 'Space Code Platform' do
         let(:params) do
           {
             id: contract.id,
-            ship_id: pilot.ships.first.id,
+            ship_id: pilot.ships.first.id
           }
         end
 
@@ -229,12 +231,12 @@ describe 'Space Code Platform' do
       tags 'Refil Fuel'
       consumes 'application/json', 'application/xml'
 
-      #parameter name: :quantity, in: :body, schema: { type: :integer }
+      parameter name: :'auth-pilot-id', in: :header, schema: { type: :string }
       parameter name: :id, in: :path, schema: { type: :integer }
       parameter name: :params, in: :body, schema: {
         type: :object,
         properties: {
-          quantity: { type: :integer },
+          quantity: { type: :integer }
         },
         required: %w[quantity]
       }
@@ -242,6 +244,7 @@ describe 'Space Code Platform' do
       response '200', 'filled fuel' do
         before { pilot.ships.first.update(fuel_level: 10, fuel_capacity: 100) }
 
+        let(:'auth-pilot-id') { pilot.id }
         let(:pilot) { create(:pilot_with_ships) }
 
         let(:id) { pilot.ships.first.id }
@@ -253,6 +256,7 @@ describe 'Space Code Platform' do
       response '400', 'bad request' do
         let(:pilot) { create(:pilot_with_ships) }
 
+        let(:'auth-pilot-id') { pilot.id }
         let(:id) { pilot.ships.first.id }
         let(:params) { { quantity: 100 } }
 
@@ -270,7 +274,7 @@ describe 'Space Code Platform' do
 
       response '200', 'reports' do
         let(:type) { 'by_planet' }
-        
+
         run_test!
       end
 

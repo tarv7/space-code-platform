@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTravelRoutes < ActiveRecord::Migration[6.1]
   def change
     create_table :travel_routes do |t|
@@ -10,6 +12,6 @@ class CreateTravelRoutes < ActiveRecord::Migration[6.1]
 
     add_check_constraint :travel_routes, 'cost > 0', name: 'check_positive_cost'
 
-    add_index :travel_routes, [:origin_id, :destiny_id], unique: true
+    add_index :travel_routes, %i[origin_id destiny_id], unique: true
   end
 end

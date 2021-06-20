@@ -224,6 +224,10 @@ paths:
       tags:
       - Refil Fuel
       parameters:
+      - name: auth-pilot-id
+        in: header
+        schema:
+          type: string
       - name: id
         in: path
         schema:

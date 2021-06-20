@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Contract < ApplicationRecord
   include Stateable
-  
+
   belongs_to :pilot, optional: true
-  belongs_to :payload, class_name: "Resource"
-  belongs_to :origin, class_name: "Planet"
-  belongs_to :destiny, class_name: "Planet"
+  belongs_to :payload, class_name: 'Resource'
+  belongs_to :origin, class_name: 'Planet'
+  belongs_to :destiny, class_name: 'Planet'
 
   has_many :reports, as: :reportable
 
@@ -18,8 +20,8 @@ class Contract < ApplicationRecord
   private
 
   def report_opened
-    return unless self.opened?
+    return unless opened?
 
-    reports.create(description: "#{self.description} was opened")
+    reports.create(description: "#{description} was opened")
   end
 end

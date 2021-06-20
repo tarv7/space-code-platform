@@ -1,3 +1,20 @@
+# frozen_string_literal: true
+
+# example
+# [
+#   {...},
+#   "calas": {
+#     "sent": {
+#       "food": 140,
+#       "minerals": 10,
+#       "water": 5
+#     },
+#     "received": {
+# 	    ...
+#     }
+#   },
+#   {...}
+# ]
 module Reports
   class ByPlanetSerializer
     def serializable_hash

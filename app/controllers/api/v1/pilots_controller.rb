@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class PilotsController < ApplicationController
@@ -11,7 +13,7 @@ module Api
 
       def pilot_params
         params.require(:pilot).permit(:certification, :name, :age, :credits, :location_id,
-                                      ships_attributes: [:fuel_capacity, :fuel_level, :weight_capacity])
+                                      ships_attributes: %i[fuel_capacity fuel_level weight_capacity])
       end
     end
   end

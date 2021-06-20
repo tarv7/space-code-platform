@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Planet < ApplicationRecord
   has_many :origin_contracts, class_name: 'Contract', foreign_key: 'origin_id'
   has_many :destiny_contracts, class_name: 'Contract', foreign_key: 'destiny_id'

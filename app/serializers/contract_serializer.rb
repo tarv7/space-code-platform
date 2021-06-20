@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContractSerializer < ActiveModel::Serializer
   attributes :id, :description, :value, :payload, :state
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceSerializer < ActiveModel::Serializer
   attributes :id, :name
   attribute :weight, if: -> { @instance_options[:weight].present? }

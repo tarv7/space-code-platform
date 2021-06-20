@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class TravelsController < ApplicationController
+      before_action :user_authenticate!
+
       def create
         Travel.new(contract: contract, ship_id: contract_params[:ship_id]).call!
 

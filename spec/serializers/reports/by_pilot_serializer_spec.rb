@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 
 require 'rails_helper'
 
 RSpec.describe Reports::ByPilotSerializer do
-  let(:pilot_1) { create(:pilot, name: "Pilot 1") }
-  let(:pilot_2) { create(:pilot, name: "Pilot 2") }
-  let(:pilot_3) { create(:pilot, name: "Pilot 3") }
+  let(:pilot_1) { create(:pilot, name: 'Pilot 1') }
+  let(:pilot_2) { create(:pilot, name: 'Pilot 2') }
+  let(:pilot_3) { create(:pilot, name: 'Pilot 3') }
   let(:expected) do
     [
       {
@@ -18,7 +19,7 @@ RSpec.describe Reports::ByPilotSerializer do
         pilot_2.name.to_sym => {
           minerals: 64,
           water: 512
-        },
+        }
       },
       {
         pilot_3.name.to_sym => {
@@ -45,5 +46,5 @@ RSpec.describe Reports::ByPilotSerializer do
 
   subject { described_class.new.serializable_hash }
 
-  it { expect(subject).to match(expected) }
+  it { expect(subject).to match_array(expected) }
 end

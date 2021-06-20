@@ -1,13 +1,16 @@
 # frozen_string_literal: true
 
+# Class that contains the algorithm to calculate the best routes for all pairs of planet.
+# The class was implemented based on the classic Floyd Warshall algorithm.
 class CalculateRoutes
-  KEY_CACHE_BEST_PATHS = "CalculateRoutes#best_paths"
+  KEY_CACHE_BEST_PATHS = 'CalculateRoutes#best_paths'
   INFINITE = (1 << (1.size * 8 - 1)) - 1 # 9223372036854775807
 
   def initialize
     @costs = {}
-    @sub_paths = {}
     @paths = {}
+
+    initialize_sub_paths
   end
 
   def best_path(origin:, destiny:)
@@ -18,7 +21,7 @@ class CalculateRoutes
   end
 
   def self.best_path(origin:, destiny:)
-    self.new.best_path(origin: origin, destiny: destiny)
+    new.best_path(origin: origin, destiny: destiny)
   end
 
   private
@@ -42,13 +45,6 @@ class CalculateRoutes
 
   def calculate_costs
     @costs = travel_routes.inject({}) { |hash, value| hash.merge!(value) }
-    @sub_paths = {}
-
-    planets.each do |origin|
-      planets.each do |destiny|
-        @sub_paths[{ origin => destiny }] = origin
-      end
-    end
 
     planets.each do |sub_planet|
       planets.each do |origin|
@@ -61,11 +57,10 @@ class CalculateRoutes
           origin_sub     = @costs[{ origin => sub_planet }]
           sub_destiny    = @costs[{ sub_planet => destiny }]
 
-          if origin_sub + sub_destiny < origin_destiny
-            @costs[{ origin => destiny }] = origin_sub + sub_destiny
+          next unless origin_sub + sub_destiny < origin_destiny
 
-            @sub_paths[{ origin => destiny }] = @sub_paths[{ sub_planet => destiny }]
-          end
+          @costs[{ origin => destiny }] = origin_sub + sub_destiny
+          @sub_paths[{ origin => destiny }] = @sub_paths[{ sub_planet => destiny }]
         end
       end
     end
@@ -74,8 +69,6 @@ class CalculateRoutes
   end
 
   def calculate_paths
-    @paths = {}
-
     planets.each do |origin|
       planets.each do |destiny|
         @paths[{ origin => destiny }] = depth_first_search_path(origin, destiny)
@@ -91,17 +84,25 @@ class CalculateRoutes
     path
   end
 
+  def initialize_sub_paths
+    @sub_paths = {}
+
+    planets.each do |origin|
+      planets.each do |destiny|
+        @sub_paths[{ origin => destiny }] = origin
+      end
+    end
+  end
+
   def planets
     @_planets ||= Planet.pluck(:name)
   end
 
   def travel_routes
-    @_travel_routes ||= begin
-      TravelRoute.all.includes(:origin, :destiny).map do |r|
-        {
-          { r.origin.name => r.destiny.name } => r.cost
-        }
-      end
+    @_travel_routes ||= TravelRoute.all.includes(:origin, :destiny).map do |r|
+      {
+        { r.origin.name => r.destiny.name } => r.cost
+      }
     end
   end
 end
