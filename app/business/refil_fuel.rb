@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # class that contains the business rule necessary to supply ships
-class RefilFuel
+class RefilFuel < MainBusiness
   class RefilFuelError < StandardError; end
 
   UNIT_COST = 7
 
-  def initialize(ship, fuel_quantity)
+  def initialize(ship:, fuel_quantity:)
     @ship = ship
     @fuel_quantity = fuel_quantity
   end
@@ -20,10 +20,6 @@ class RefilFuel
 
       create_report
     end
-  end
-
-  def self.call!(ship, fuel_quantity)
-    new(ship, fuel_quantity).call!
   end
 
   private

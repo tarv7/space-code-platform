@@ -7,7 +7,7 @@ module Api
         before_action :user_authenticate!
 
         def update
-          RefilFuel.call!(ship, fuel_params[:quantity].to_i)
+          RefilFuel.call!(ship: ship, fuel_quantity: fuel_params[:quantity].to_i)
 
           render json: ship, status: :ok
         end

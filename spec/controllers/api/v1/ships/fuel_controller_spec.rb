@@ -39,7 +39,7 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
       end
 
       it 'should call business class' do
-        expect(RefilFuel).to receive(:call!).with(ship, 1)
+        expect(RefilFuel).to receive(:call!).with(ship: ship, fuel_quantity: 1)
 
         subject
       end
