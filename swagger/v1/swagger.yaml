@@ -4,6 +4,14 @@ info:
   title: Space Code Platform API V1
   version: v1
 paths:
+  "/api/v1/resources":
+    get:
+      summary: List all resources
+      tags:
+      - Resource
+      responses:
+        '200':
+          description: openeds
   "/api/v1/planets":
     get:
       summary: List all planets

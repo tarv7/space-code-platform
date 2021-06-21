@@ -24,6 +24,17 @@ describe 'Space Code Platform' do
     create(:travel_route, origin: calas, destiny: aqua, cost: 15)
   end
 
+  path '/api/v1/resources' do
+    get 'List all resources' do
+      tags 'Resource'
+      consumes 'application/json', 'application/xml'
+
+      response '200', 'openeds' do
+        run_test!
+      end
+    end
+  end # GET /api/v1/resources - List all resources
+
   path '/api/v1/planets' do
     get 'List all planets' do
       tags 'Planet'
