@@ -58,7 +58,7 @@ RSpec.describe Api::V1::Ships::FuelController, type: :controller do
         it 'match response body' do
           subject
 
-          expect(body['message']).to start_with('Couldn\'t find Ship with \'id\'=-1')
+          expect(body['message']).to start_with('Couldn\'t find Ship #-1')
         end
       end
 

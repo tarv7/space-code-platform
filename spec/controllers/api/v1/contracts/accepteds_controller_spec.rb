@@ -63,7 +63,7 @@ RSpec.describe Api::V1::Contracts::AcceptedsController, type: :controller do
         it 'returns message error' do
           subject
 
-          expect(body['message']).to start_with('Couldn\'t find Contract with \'id\'=-1')
+          expect(body['message']).to start_with('Couldn\'t find Contract #-1')
         end
       end
 
