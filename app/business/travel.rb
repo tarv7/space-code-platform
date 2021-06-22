@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # class that contains the business rule necessary to carry out intergalactic travel
-class Travel
+class Travel < MainBusiness
   class TravelError < StandardError; end
 
   def initialize(contract:, ship_id:)

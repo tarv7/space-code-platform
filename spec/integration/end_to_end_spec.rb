@@ -24,10 +24,21 @@ describe 'Space Code Platform' do
     create(:travel_route, origin: calas, destiny: aqua, cost: 15)
   end
 
+  path '/api/v1/resources' do
+    get 'List all resources' do
+      tags 'Resource'
+      consumes 'application/json'
+
+      response '200', 'openeds' do
+        run_test!
+      end
+    end
+  end # GET /api/v1/resources - List all resources
+
   path '/api/v1/planets' do
     get 'List all planets' do
       tags 'Planet'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
 
       response '200', 'openeds' do
         run_test!
@@ -38,7 +49,7 @@ describe 'Space Code Platform' do
   path '/api/v1/travel_routes' do
     get 'List all travel routes with cost and paths' do
       tags 'Travel route'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
 
       response '200', 'openeds' do
         run_test!
@@ -49,7 +60,7 @@ describe 'Space Code Platform' do
   path '/api/v1/pilots' do
     post 'Add pilots and their ships to the system' do
       tags 'Pilot'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
       parameter name: :pilot, in: :body, schema: {
         type: :object,
         properties: {
@@ -107,7 +118,7 @@ describe 'Space Code Platform' do
   path '/api/v1/contracts' do
     post 'Publish transport contracts' do
       tags 'Contract'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
       parameter name: :contract, in: :body, schema: {
         type: :object,
         properties: {
@@ -156,7 +167,7 @@ describe 'Space Code Platform' do
   path '/api/v1/contracts/opened' do
     get 'List open contracts' do
       tags 'Open Contracts'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
 
       response '200', 'openeds' do
         run_test!
@@ -167,7 +178,7 @@ describe 'Space Code Platform' do
   path '/api/v1/contracts/{id}/accept' do
     patch 'Accept transport contracts' do
       tags 'Accept Contracts'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
 
       parameter name: :'auth-pilot-id', in: :header, schema: { type: :string }
       parameter name: :id, in: :path, schema: { type: :integer }
@@ -199,7 +210,7 @@ describe 'Space Code Platform' do
   path '/api/v1/travels' do
     post 'Travel between planets and Grant credits to the pilot after fulfilling the contract' do
       tags 'Travel'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
 
       parameter name: :'auth-pilot-id', in: :header, schema: { type: :string }
       parameter name: :params, in: :body, schema: {
@@ -250,7 +261,7 @@ describe 'Space Code Platform' do
   path '/api/v1/ships/{id}/fuel' do
     patch 'Register a refill of the fuel' do
       tags 'Refil Fuel'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
 
       parameter name: :'auth-pilot-id', in: :header, schema: { type: :string }
       parameter name: :id, in: :path, schema: { type: :integer }
@@ -289,7 +300,7 @@ describe 'Space Code Platform' do
   path '/api/v1/reports' do
     get 'Reports' do
       tags 'Reports'
-      consumes 'application/json', 'application/xml'
+      consumes 'application/json'
 
       parameter name: :type, in: :query, schema: { type: :string }
 

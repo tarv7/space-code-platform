@@ -72,7 +72,7 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
         it 'returns message error' do
           subject
 
-          expect(body['message']).to start_with('Couldn\'t find Contract with \'id\'=-1')
+          expect(body['message']).to start_with('Couldn\'t find Contract #-1')
         end
       end
 
@@ -88,7 +88,7 @@ RSpec.describe Api::V1::TravelsController, type: :controller do
         it 'returns message error' do
           subject
 
-          expect(body['message']).to start_with("Couldn't find Ship with 'id'=#{another_ship_id}")
+          expect(body['message']).to start_with("Couldn't find Ship ##{another_ship_id}")
         end
       end
 

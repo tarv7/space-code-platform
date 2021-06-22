@@ -6,7 +6,7 @@ module Api
       before_action :user_authenticate!
 
       def create
-        Travel.new(contract: contract, ship_id: contract_params[:ship_id]).call!
+        Travel.call!(contract: contract, ship_id: contract_params[:ship_id])
 
         render json: contract, include: 'origin,destiny,pilot.ships', status: :ok
       end

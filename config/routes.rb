@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       resources :planets, only: :index
 
       resources :travel_routes, only: :index
+
+      resources :resources, only: :index
     end
   end
 end

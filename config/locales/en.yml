@@ -40,6 +40,7 @@ en:
         luhn_certification: 'Certification must follow the Luhn standard'
 
   errors:
+    record_not_found: "Couldn't find %{model} #%{id}"
     need_log_into: 'You need to log into the system'
     refil_fuel:
       need_be_positive: 'Amount of refill needs to be positive'

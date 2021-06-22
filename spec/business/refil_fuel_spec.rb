@@ -6,7 +6,7 @@ RSpec.describe RefilFuel, type: :model do
   let!(:ship) { create(:ship, fuel_level: 0) }
 
   describe '#call!' do
-    subject { described_class.call!(ship, quantity) }
+    subject { described_class.call!(ship: ship, fuel_quantity: quantity) }
 
     context 'when is successfully' do
       let(:quantity) { 1 }

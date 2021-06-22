@@ -4,6 +4,14 @@ info:
   title: Space Code Platform API V1
   version: v1
 paths:
+  "/api/v1/resources":
+    get:
+      summary: List all resources
+      tags:
+      - Resource
+      responses:
+        '200':
+          description: openeds
   "/api/v1/planets":
     get:
       summary: List all planets
@@ -68,41 +76,6 @@ paths:
               - credits
               - payload_id
               - ships_attributes
-          application/xml:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                certification:
-                  type: string
-                age:
-                  type: integer
-                credits:
-                  type: integer
-                location_id:
-                  type: integer
-                ships_attributes:
-                  type: array
-                  items:
-                    properties:
-                      fuel_capacity:
-                        type: integer
-                      fuel_level:
-                        type: integer
-                      weight_capacity:
-                        type: integer
-                    required:
-                    - fuel_capacity
-                    - fuel_level
-                    - weight_capacity
-              required:
-              - name
-              - certification
-              - age
-              - credits
-              - payload_id
-              - ships_attributes
   "/api/v1/contracts":
     post:
       summary: Publish transport contracts
@@ -117,28 +90,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              type: object
-              properties:
-                description:
-                  type: string
-                value:
-                  type: integer
-                payload_weight:
-                  type: integer
-                payload_id:
-                  type: integer
-                origin_id:
-                  type: integer
-                destiny_id:
-                  type: integer
-              required:
-              - value
-              - payload_weight
-              - payload_id
-              - origin_id
-              - destiny_id
-          application/xml:
             schema:
               type: object
               properties:
@@ -217,17 +168,6 @@ paths:
               required:
               - id
               - ship_id
-          application/xml:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                ship_id:
-                  type: integer
-              required:
-              - id
-              - ship_id
   "/api/v1/ships/{id}/fuel":
     patch:
       summary: Register a refill of the fuel
@@ -251,14 +191,6 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              type: object
-              properties:
-                quantity:
-                  type: integer
-              required:
-              - quantity
-          application/xml:
             schema:
               type: object
               properties:
