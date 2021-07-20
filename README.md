@@ -1,4 +1,5 @@
 # Space Code Platform
+The problem description is explained in the `problem.md` file.
 
 ## Running the project
 ### Install dependencies
